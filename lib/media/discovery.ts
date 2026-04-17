@@ -3,7 +3,16 @@ import path from "path";
 import { classifyMedia, deriveAltText } from "@/lib/media/classifier";
 import type { HomepagePlacement, MediaAsset, MediaKind, MediaSidecar, MediaSourceGroup } from "@/lib/media/types";
 
-const ASSET_ROOT = path.join(/*turbopackIgnore: true*/ process.cwd(), "assets");
+const PROJECT_ROOT = /*turbopackIgnore: true*/ process.cwd();
+const ASSET_ROOT = path.join(PROJECT_ROOT, "assets");
+const STATIC_MEDIA_DIRECTORIES = {
+  visualImages: path.join(PROJECT_ROOT, "assets", "visual", "pictures"),
+  visualImagesAlt: path.join(PROJECT_ROOT, "assets", "visual", "images"),
+  visualVideos: path.join(PROJECT_ROOT, "assets", "visual", "videos"),
+  ugcImages: path.join(PROJECT_ROOT, "assets", "ugc", "pictures"),
+  ugcImagesAlt: path.join(PROJECT_ROOT, "assets", "ugc", "images"),
+  ugcVideos: path.join(PROJECT_ROOT, "assets", "ugc", "videos"),
+} as const;
 const MEDIA_EXTENSIONS: Record<MediaKind, string[]> = {
   image: [".jpg", ".jpeg", ".png", ".webp", ".avif"],
   video: [".mp4", ".mov", ".webm"],
@@ -42,19 +51,23 @@ function sourceGroupFromPath(filePath: string): MediaSourceGroup {
 function collectMediaFiles(kind: MediaKind) {
   const filePaths: string[] = [];
 
-  function walk(directory: string) {
+  const directories =
+    kind === "image"
+      ? [STATIC_MEDIA_DIRECTORIES.visualImages, STATIC_MEDIA_DIRECTORIES.visualImagesAlt, STATIC_MEDIA_DIRECTORIES.ugcImages, STATIC_MEDIA_DIRECTORIES.ugcImagesAlt]
+      : [STATIC_MEDIA_DIRECTORIES.visualVideos, STATIC_MEDIA_DIRECTORIES.ugcVideos];
+
+  for (const directory of directories) {
     if (!fs.existsSync(directory)) {
-      return;
+      continue;
     }
 
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-      const fullPath = path.join(directory, entry.name);
-      if (isLogoAssetPath(fullPath)) {
+      if (!entry.isFile()) {
         continue;
       }
 
-      if (entry.isDirectory()) {
-        walk(fullPath);
+      const fullPath = path.join(directory, entry.name);
+      if (isLogoAssetPath(fullPath)) {
         continue;
       }
 
@@ -64,7 +77,6 @@ function collectMediaFiles(kind: MediaKind) {
     }
   }
 
-  walk(ASSET_ROOT);
   return filePaths;
 }
 
@@ -74,18 +86,16 @@ function inferPosterSrc(filePath: string, sourceGroup: MediaSourceGroup, sidecar
   }
 
   const basename = path.basename(filePath, path.extname(filePath));
-  const siblingDirectories = [
-    path.join(path.dirname(filePath), "..", "pictures"),
-    path.join(path.dirname(filePath), "..", "images"),
-    path.dirname(filePath),
-  ];
+  const candidateDirectories =
+    sourceGroup === "visual"
+      ? [STATIC_MEDIA_DIRECTORIES.visualImages, STATIC_MEDIA_DIRECTORIES.visualImagesAlt]
+      : [STATIC_MEDIA_DIRECTORIES.ugcImages, STATIC_MEDIA_DIRECTORIES.ugcImagesAlt];
 
-  for (const directory of siblingDirectories) {
-    const resolvedDirectory = path.resolve(directory);
-    if (!fs.existsSync(resolvedDirectory)) continue;
+  for (const directory of candidateDirectories) {
+    if (!fs.existsSync(directory)) continue;
 
     for (const extension of MEDIA_EXTENSIONS.image) {
-      const candidate = path.join(resolvedDirectory, `${basename}${extension}`);
+      const candidate = path.join(directory, `${basename}${extension}`);
       if (fs.existsSync(candidate)) {
         return toPublicMediaPath(candidate);
       }
