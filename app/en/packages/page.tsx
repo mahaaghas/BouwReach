@@ -75,7 +75,7 @@ export default function EnglishPackagesPage() {
   return (
     <div className="section-shell pb-8 pt-10">
       <section className="accent-grid panel relative overflow-hidden rounded-[40px] px-6 py-12 md:px-10 md:py-16">
-        <div className="pointer-events-none absolute right-8 top-8 opacity-[0.04]">
+        <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.07] md:right-10 md:top-10">
           <BrandLogo variant="mark-black" alt="" className="w-20 md:w-24" />
         </div>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -207,7 +207,7 @@ export default function EnglishPackagesPage() {
 
       <section className="pt-10">
         <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
-          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
             <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
           </div>
           <SectionHeading

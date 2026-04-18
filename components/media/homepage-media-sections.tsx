@@ -33,7 +33,7 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
       <section className="section-shell pt-24">
         <div className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-stretch">
           <div className="panel relative overflow-hidden rounded-[36px] px-6 py-8 md:px-8 md:py-10">
-            <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
+            <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
               <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
             </div>
             <SectionHeading
@@ -214,7 +214,7 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
           </div>
 
           <article className="panel relative overflow-hidden rounded-[36px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,245,239,0.95))] px-6 py-8 md:px-8 md:py-10">
-            <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
+            <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
               <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
             </div>
             <div className="max-w-xl">

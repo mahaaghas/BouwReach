@@ -53,7 +53,7 @@ export default function Home() {
     <div className="pb-8 pt-10">
       <section className="section-shell">
         <div className="accent-grid premium-grid panel relative overflow-hidden rounded-[40px] px-6 py-12 md:px-10 md:py-16">
-          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.03]">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
             <BrandLogo variant="mark-black" alt="" className="w-28 md:w-36" />
           </div>
           <div className="relative grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
@@ -182,8 +182,8 @@ export default function Home() {
 
       <section className="section-shell pt-24">
         <div className="relative overflow-hidden rounded-[36px] bg-[var(--dark)] px-6 py-12 text-white md:px-10">
-          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
-            <BrandLogo variant="mark-white" alt="" className="w-16 md:w-20" />
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.08] md:right-10 md:top-10">
+            <BrandLogo variant="mark-blue" alt="" className="w-16 md:w-20" />
           </div>
           <div className="mb-8 flex flex-wrap gap-3">
             <span className="rounded-full border border-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
@@ -207,7 +207,7 @@ export default function Home() {
 
       <section className="section-shell pt-24">
         <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
-          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
             <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
           </div>
           <SectionHeading

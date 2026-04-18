@@ -29,8 +29,8 @@ export function SiteFooter() {
     <footer className="px-4 pb-8 pt-20">
       <div className="section-shell">
         <div className="relative overflow-hidden rounded-[32px] bg-[var(--dark)] px-6 py-10 text-white md:px-10">
-          <div className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 opacity-[0.04] md:block">
-            <BrandLogo variant="mark-white" alt="" className="w-[180px]" />
+          <div className="pointer-events-none absolute bottom-6 right-6 hidden select-none opacity-[0.08] md:block md:bottom-10 md:right-10">
+            <BrandLogo variant="mark-blue" alt="" className="w-[180px]" />
           </div>
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">

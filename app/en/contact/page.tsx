@@ -16,7 +16,7 @@ export default function EnglishContactPage() {
     <div className="section-shell pb-8 pt-10">
       <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="accent-grid panel relative overflow-hidden rounded-[40px] px-6 py-10 md:px-8 md:py-12">
-          <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
             <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
           </div>
           <SectionHeading
