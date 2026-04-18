@@ -90,93 +90,141 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
           </p>
         </div>
       ) : (
-        <form className="space-y-5" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-            value={formState.honey}
-            onChange={(event) => setFormState((current) => ({ ...current, honey: event.target.value }))}
-            className="hidden"
-            aria-hidden="true"
-          />
-          <div className="grid gap-5 md:grid-cols-2">
-            <Field
-              label={isEnglish ? "Name" : "Naam"}
-              name="name"
-              autoComplete="name"
-              value={formState.naam}
-              onChange={(value) => setFormState((current) => ({ ...current, naam: value }))}
-            />
-            <Field
-              label={isEnglish ? "Company" : "Bedrijf"}
-              name="organization"
-              autoComplete="organization"
-              value={formState.bedrijf}
-              onChange={(value) => setFormState((current) => ({ ...current, bedrijf: value }))}
-            />
-            <Field
-              label={isEnglish ? "Website" : "Website"}
-              name="url"
-              autoComplete="url"
-              value={formState.website}
-              onChange={(value) => setFormState((current) => ({ ...current, website: value }))}
-            />
-            <Field
-              label={isEnglish ? "Phone number" : "Telefoonnummer"}
-              name="tel"
-              autoComplete="tel"
-              value={formState.telefoonnummer}
-              onChange={(value) => setFormState((current) => ({ ...current, telefoonnummer: value }))}
-            />
-            <Field
-              label={isEnglish ? "E mail" : "E mail"}
-              name="email"
-              autoComplete="email"
-              type="email"
-              value={formState.email}
-              onChange={(value) => setFormState((current) => ({ ...current, email: value }))}
-            />
-          </div>
-          <Field
-            label={isEnglish ? "Message" : "Bericht"}
-            name="message"
-            multiline
-            value={formState.bericht}
-            onChange={(value) => setFormState((current) => ({ ...current, bericht: value }))}
-          />
-          {status === "error" ? (
-            <p className="rounded-[20px] border border-[rgba(168,34,34,0.18)] bg-[rgba(168,34,34,0.06)] px-4 py-3 text-sm leading-6 text-[rgb(128,34,34)]">
-              {errorMessage}
+        <div className="space-y-6">
+          <div className="rounded-[24px] border border-[var(--border)] bg-[rgba(18,18,18,0.03)] p-5">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">
+              {isEnglish ? "Intake" : "Intake"}
             </p>
-          ) : null}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="inline-flex rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--dark-soft)]"
-          >
-            {isEnglish ? "Send request" : "Verstuur aanvraag"}
-          </button>
-          <p className="text-sm leading-6 text-[var(--muted)]">
-            {isEnglish ? (
-              <>
-                By submitting, you agree to our{" "}
-                <Link href="/en/privacy" className="font-semibold text-[var(--foreground)] underline underline-offset-4">
-                  privacy page
-                </Link>
-                .
-              </>
-            ) : (
-              <>
-                Door te versturen ga je akkoord met onze{" "}
-                <Link href="/privacy" className="font-semibold text-[var(--foreground)] underline underline-offset-4">
-                  privacypagina
-                </Link>
-                .
-              </>
-            )}
-          </p>
-        </form>
+            <h2 className="mt-3 text-2xl font-semibold">
+              {isEnglish ? "Tell us who you are and where you want more inquiries." : "Vertel wie je bent en waar je meer aanvragen wilt."}
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+              {isEnglish
+                ? "We use this to understand your company, your current sales situation and whether a free analysis makes sense."
+                : "Dit gebruiken we om je bedrijf, je huidige situatie en de juiste volgende stap goed te beoordelen."}
+            </p>
+          </div>
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formState.honey}
+              onChange={(event) => setFormState((current) => ({ ...current, honey: event.target.value }))}
+              className="hidden"
+              aria-hidden="true"
+            />
+
+            <fieldset className="space-y-5">
+              <legend className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">
+                {isEnglish ? "Company details" : "Bedrijfsgegevens"}
+              </legend>
+              <div className="grid gap-5 md:grid-cols-2">
+                <Field
+                  label={isEnglish ? "Name" : "Naam"}
+                  name="name"
+                  autoComplete="name"
+                  value={formState.naam}
+                  onChange={(value) => setFormState((current) => ({ ...current, naam: value }))}
+                />
+                <Field
+                  label={isEnglish ? "Company" : "Bedrijf"}
+                  name="organization"
+                  autoComplete="organization"
+                  value={formState.bedrijf}
+                  onChange={(value) => setFormState((current) => ({ ...current, bedrijf: value }))}
+                />
+                <Field
+                  label={isEnglish ? "Website" : "Website"}
+                  name="url"
+                  autoComplete="url"
+                  value={formState.website}
+                  onChange={(value) => setFormState((current) => ({ ...current, website: value }))}
+                />
+                <Field
+                  label={isEnglish ? "Phone number" : "Telefoonnummer"}
+                  name="tel"
+                  autoComplete="tel"
+                  value={formState.telefoonnummer}
+                  onChange={(value) => setFormState((current) => ({ ...current, telefoonnummer: value }))}
+                />
+                <Field
+                  label={isEnglish ? "E mail" : "E mail"}
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={(value) => setFormState((current) => ({ ...current, email: value }))}
+                  className="md:col-span-2"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset className="space-y-5">
+              <legend className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">
+                {isEnglish ? "Current situation" : "Huidige situatie"}
+              </legend>
+              <Field
+                label={
+                  isEnglish
+                    ? "What do you offer, where do you want more inquiries, and what is not working right now?"
+                    : "Wat bied je aan, waar wil je meer aanvragen uit halen en wat werkt nu nog niet goed?"
+                }
+                name="message"
+                multiline
+                value={formState.bericht}
+                onChange={(value) => setFormState((current) => ({ ...current, bericht: value }))}
+              />
+            </fieldset>
+
+            <div className="rounded-[24px] border border-[rgba(18,18,18,0.08)] bg-white/70 p-5">
+              <p className="text-sm font-semibold text-[var(--foreground)]">
+                {isEnglish ? "What happens after sending" : "Wat er gebeurt na versturen"}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                {isEnglish
+                  ? "We review your request, check whether there is a strong fit, and respond with the most logical next step."
+                  : "We bekijken je aanvraag, checken of er een sterke match is en reageren met de meest logische volgende stap."}
+              </p>
+            </div>
+
+            {status === "error" ? (
+              <p className="rounded-[20px] border border-[rgba(168,34,34,0.18)] bg-[rgba(168,34,34,0.06)] px-4 py-3 text-sm leading-6 text-[rgb(128,34,34)]">
+                {errorMessage}
+              </p>
+            ) : null}
+
+            <div className="flex flex-col gap-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--dark-soft)]"
+              >
+                {isEnglish ? "Send request" : "Verstuur aanvraag"}
+              </button>
+              <p className="text-sm leading-6 text-[var(--muted)]">
+                {isEnglish ? (
+                  <>
+                    By submitting, you agree to our{" "}
+                    <Link href="/en/privacy" className="font-semibold text-[var(--foreground)] underline underline-offset-4">
+                      privacy page
+                    </Link>
+                    . We only use your details to follow up your request.
+                  </>
+                ) : (
+                  <>
+                    Door te versturen ga je akkoord met onze{" "}
+                    <Link href="/privacy" className="font-semibold text-[var(--foreground)] underline underline-offset-4">
+                      privacypagina
+                    </Link>
+                    . We gebruiken je gegevens alleen om je aanvraag op te volgen.
+                  </>
+                )}
+              </p>
+            </div>
+          </form>
+        </div>
       )}
     </div>
   );
@@ -190,11 +238,12 @@ type FieldProps = {
   type?: string;
   multiline?: boolean;
   autoComplete?: string;
+  className?: string;
 };
 
-function Field({ label, name, value, onChange, type = "text", multiline = false, autoComplete }: FieldProps) {
+function Field({ label, name, value, onChange, type = "text", multiline = false, autoComplete, className }: FieldProps) {
   return (
-    <label className="block">
+    <label className={className}>
       <span className="mb-2 block text-sm font-semibold text-[var(--foreground)]">{label}</span>
       {multiline ? (
         <textarea

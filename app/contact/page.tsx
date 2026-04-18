@@ -21,20 +21,20 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="Contact"
             title="Plan een gratis analyse"
-            body="Vertel kort waar je nu staat en waar je meer aanvragen wilt krijgen."
+            body="Voor bouw, prefab, kozijnen, gevel en renovatiebedrijven die serieuzer zichtbaar willen worden en meer projectaanvragen willen ophalen."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Stap 1</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">We bekijken waar je nu bereik laat liggen.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Wat we bekijken</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Je boodschap, je huidige zichtbaarheid en waar aanvragen nu blijven hangen.</p>
             </div>
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Stap 2</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">We laten zien wat eerst aangescherpt moet worden.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Wat je terugkrijgt</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Een directe inschatting van je grootste gemiste kansen en wat eerst scherper moet.</p>
             </div>
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Stap 3</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Daarna bepalen we welk pakket logisch is.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Wat daarna gebeurt</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Pas daarna bepalen we of en welk pakket logisch aansluit op jouw situatie.</p>
             </div>
           </div>
           <div className="mt-10 space-y-5 rounded-[28px] bg-[var(--dark)] p-6 text-white">
@@ -47,7 +47,7 @@ export default function ContactPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--gold)]">Wat je krijgt</p>
               <p className="mt-2 text-sm leading-6 text-white/74">
-                Een directe blik op je huidige aanpak, je grootste gemiste kansen en welk pakket het beste past.
+                Een directe blik op je huidige aanpak, je grootste gemiste kansen en welke volgende stap commercieel het meeste oplevert.
               </p>
             </div>
           </div>

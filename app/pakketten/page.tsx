@@ -25,7 +25,7 @@ const packages = [
     optimisation: "licht",
     support: "standaard",
     description:
-      "Basis is bedoeld voor bedrijven die hun eerste serieuze stap willen zetten richting voorspelbare leadgeneratie.",
+      "Voor bedrijven die hun eerste serieuze stap willen zetten richting voorspelbare aanvraaggeneratie.",
   },
   {
     name: "Groei",
@@ -41,7 +41,7 @@ const packages = [
     optimisation: "maandelijks",
     support: "standaard",
     description:
-      "Groei is voor bedrijven die niet af en toe een aanvraag willen, maar een consistenter ritme willen opbouwen.",
+      "Voor bedrijven die van losse aanvragen naar een consistenter ritme van serieuze projectkansen willen.",
   },
   {
     name: "Scale",
@@ -50,20 +50,20 @@ const packages = [
     label: "Voor bedrijven die willen opschalen",
     content: "6 video's",
     ads: "meerdere campagnes",
-    pages: "3 custom landingspagina’s per maand",
+    pages: "3 custom landingspagina's per maand",
     leadFlow: "volledig ingericht",
     retargeting: "ja",
     optimisation: "wekelijks",
     support: "prioriteit",
     description:
-      "Scale is voor bedrijven die sneller willen groeien in meerdere diensten, regio’s of markten en daar een steviger systeem voor nodig hebben.",
+      "Voor bedrijven die sneller willen groeien in meerdere diensten, regio's of markten met een steviger systeem.",
   },
 ];
 
 const comparisonRows = [
   { key: "content", label: "Aanvraag content per maand" },
   { key: "ads", label: "Advertenties" },
-  { key: "pages", label: "Aanvraag pagina’s per maand" },
+  { key: "pages", label: "Aanvraag pagina's per maand" },
   { key: "leadFlow", label: "Lead flow" },
   { key: "retargeting", label: "Retargeting" },
   { key: "optimisation", label: "Optimalisatie" },
@@ -81,12 +81,50 @@ export default function PackagesPage() {
           <SectionHeading
             eyebrow="Pakketten"
             title="Kies het pakket dat past bij jouw groeifase"
-            body="Wij werken met vaste pakketten. Geen verrassingen. Geen marketing onzin. Gewoon een duidelijke aanpak gericht op meer aanvragen."
+            body="Duidelijke pakketten voor bedrijven die meer serieuze projectaanvragen willen. Geen verrassingen. Geen losse marketingtaken. Gewoon een heldere route naar meer aanvragen."
           />
           <div className="rounded-[28px] bg-[var(--dark)] px-6 py-5 text-white">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--gold)]">Introductietarief tot en met 15 juni</p>
             <p className="mt-2 text-sm text-white/74">Beperkt aantal plekken</p>
           </div>
+        </div>
+      </section>
+
+      <section className="pt-10">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {packages.map((item) => (
+            <article
+              key={item.name}
+              className={clsx(
+                "panel relative overflow-hidden rounded-[32px] p-6 md:p-8",
+                item.name === "Groei" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
+              )}
+            >
+              <div className="pointer-events-none absolute right-6 top-6 opacity-70">
+                <BrandLogo variant="mark-black" alt="" className="w-4 md:w-5" />
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <h2 className="font-[var(--font-display)] text-3xl font-semibold">{item.name}</h2>
+                {item.badge ? (
+                  <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
+                    {item.badge}
+                  </span>
+                ) : null}
+              </div>
+              <p className="mt-4 text-lg font-semibold">{item.price}</p>
+              <p className="mt-1 text-sm text-[var(--muted)]">{item.previousPrice}</p>
+              <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.72)]">{item.label}</p>
+              <p className="mt-4 text-base leading-7 text-[var(--muted)]">{item.description}</p>
+              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4 text-sm leading-6 text-[var(--foreground)]">
+                <p>Content: {item.content}</p>
+                <p>Advertenties: {item.ads}</p>
+                <p>Lead flow: {item.leadFlow}</p>
+              </div>
+              <div className="mt-8">
+                <Button href="/contact">Plan een gratis analyse</Button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -120,7 +158,7 @@ export default function PackagesPage() {
                 <div className="mt-5 space-y-2 text-sm leading-6 text-[var(--foreground)]">
                   <p>Aanvraag content per maand: {item.content}</p>
                   <p>Advertenties: {item.ads}</p>
-                  <p>Aanvraag pagina’s per maand: {item.pages}</p>
+                  <p>Aanvraag pagina&apos;s per maand: {item.pages}</p>
                   <p>Lead flow: {item.leadFlow}</p>
                   <p>Retargeting: {item.retargeting}</p>
                   <p>Optimalisatie: {item.optimisation}</p>
@@ -132,10 +170,7 @@ export default function PackagesPage() {
           <div className="hidden grid-cols-4 border-b border-[var(--border)] bg-[var(--dark)] text-white md:grid">
             <div className="px-4 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-white/56 md:px-6">Vergelijking</div>
             {packages.map((item) => (
-              <div
-                key={item.name}
-                className={clsx("px-4 py-5 md:px-6", item.name === "Groei" && "bg-white text-[var(--foreground)]")}
-              >
+              <div key={item.name} className={clsx("px-4 py-5 md:px-6", item.name === "Groei" && "bg-white text-[var(--foreground)]")}>
                 {item.badge ? (
                   <span className="mb-3 inline-flex rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
                     {item.badge}
@@ -150,10 +185,7 @@ export default function PackagesPage() {
           </div>
           <div className="hidden md:block">
             {comparisonRows.map((row, index) => (
-              <div
-                key={row.key}
-                className={clsx("grid grid-cols-4 border-b border-[var(--border)]", index === comparisonRows.length - 1 && "border-b-0")}
-              >
+              <div key={row.key} className={clsx("grid grid-cols-4 border-b border-[var(--border)]", index === comparisonRows.length - 1 && "border-b-0")}>
                 <div className="px-4 py-5 text-sm font-semibold text-[var(--foreground)] md:px-6">{row.label}</div>
                 {packages.map((item) => (
                   <div
@@ -173,42 +205,18 @@ export default function PackagesPage() {
       </section>
 
       <section className="pt-10">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {packages.map((item) => (
-            <article
-              key={item.name}
-              className={clsx(
-                "panel relative overflow-hidden rounded-[32px] p-6 md:p-8",
-                item.name === "Groei" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
-              )}
-            >
-              <div className="pointer-events-none absolute right-6 top-6 opacity-70">
-                <BrandLogo variant="mark-black" alt="" className="w-4 md:w-5" />
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                <h2 className="font-[var(--font-display)] text-3xl font-semibold">{item.name}</h2>
-                {item.badge ? (
-                  <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                    {item.badge}
-                  </span>
-                ) : null}
-              </div>
-              <p className="mt-4 text-lg font-semibold">{item.price}</p>
-              <p className="mt-1 text-sm text-[var(--muted)]">{item.previousPrice}</p>
-              <p className="mt-5 text-base leading-7 text-[var(--muted)]">{item.description}</p>
-              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4 text-sm leading-6 text-[var(--foreground)]">
-                <p>Content: {item.content}</p>
-                <p>Advertenties: {item.ads}</p>
-                <p>Lead flow: {item.leadFlow}</p>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/contact">Plan een gratis analyse</Button>
-                <Button href="/contact" variant="secondary">
-                  Neem contact op
-                </Button>
-              </div>
-            </article>
-          ))}
+        <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
+          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
+            <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
+          </div>
+          <SectionHeading
+            eyebrow="Advies"
+            title="Twijfel je welk pakket past?"
+            body="Dan starten we niet met een verkooppraatje. We kijken eerst naar je huidige positie, je aanvraagstroom en waar de grootste winst zit."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/contact">Plan een gratis analyse</Button>
+          </div>
         </div>
       </section>
     </div>

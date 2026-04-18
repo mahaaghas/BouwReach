@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MediaCard } from "@/components/media/media-card";
 import { SectionHeading } from "@/components/section-heading";
 import { BrandLogo } from "@/components/brand-logo";
@@ -7,188 +8,258 @@ type HomepageMediaSectionsProps = {
   locale?: "nl" | "en";
 };
 
+function uniqueAssets<T extends { id: string }>(assets: T[]) {
+  return assets.filter((asset, index, all) => all.findIndex((candidate) => candidate.id === asset.id) === index);
+}
+
 export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsProps) {
   const collections = getHomepageMediaCollections();
-  const heroAsset = collections.hero[0] ?? collections.services[0];
-  const showcasePool = [
-    ...collections.services,
-    ...collections.hero.slice(heroAsset ? 1 : 0),
-    ...collections.cta,
-  ].filter(
-    (asset, index, assets) =>
-      assets.findIndex((candidate) => candidate.id === asset.id) === index &&
-      asset.classification.sourceGroup === "visual"
-  );
-  const serviceAssets = showcasePool
-    .filter(
-      (asset) =>
-        asset.classification.contentType !== "team-process" &&
-        !asset.filename.includes("plans-for-the-ground-floor")
-    )
-    .slice(0, 3);
-  const topShowcaseAssets = serviceAssets.slice(0, 2);
-  const bottomFeatureAsset = serviceAssets[2] ?? collections.cta[0] ?? collections.hero[1] ?? collections.services[0];
-  const ugcAssets = collections.ugc.slice(0, 3);
-  const caseStudyAssets = collections.caseStudy.slice(0, 2);
   const isEnglish = locale === "en";
+  const visualAssets = uniqueAssets([...collections.services, ...collections.hero, ...collections.cta]).filter(
+    (asset) => asset.classification.sourceGroup === "visual"
+  );
+  const proofAssets = uniqueAssets([...collections.ugc, ...collections.caseStudy]);
+
+  const featuredVisual = visualAssets[0];
+  const supportVisual = visualAssets[1] ?? featuredVisual;
+  const proofVisual = proofAssets[0] ?? supportVisual;
+  const comparisonVisuals = uniqueAssets([
+    ...collections.caseStudy,
+    ...proofAssets.filter((asset) => asset.classification.contentType === "before-after"),
+  ]).slice(0, 2);
 
   return (
     <>
-      {heroAsset ? (
-        <section className="section-shell pt-24">
-          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="relative overflow-hidden rounded-[40px] bg-[var(--dark)] p-6 text-white md:p-8">
-              <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
-                <BrandLogo variant="mark-white" alt="" className="w-20 md:w-24" />
-              </div>
-              <SectionHeading
-                eyebrow={isEnglish ? "Hero visual" : "Hero visual"}
-                title={
-                  isEnglish
-                    ? "Premium media is chosen for intent, not decoration."
-                    : "Premium media wordt gekozen op intentie, niet op decoratie."
-                }
-                body={
-                  isEnglish
-                    ? "Hero assets are filtered to strong branding visuals and confident footage that support the first conversion decision."
-                    : "Hero assets worden gefilterd op sterke branding visuals en overtuigend beeld dat de eerste conversiebeslissing ondersteunt."
-                }
-                theme="dark"
-              />
+      <section className="section-shell pt-24">
+        <div className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-stretch">
+          <div className="panel relative overflow-hidden rounded-[36px] px-6 py-8 md:px-8 md:py-10">
+            <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
+              <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
             </div>
-            <MediaCard asset={heroAsset} priority className="min-h-full" />
-          </div>
-        </section>
-      ) : null}
-
-      {topShowcaseAssets.length === 2 && bottomFeatureAsset ? (
-        <section className="section-shell pt-24">
-          <div className="space-y-8 md:space-y-10">
-            <div className="max-w-3xl">
-              <SectionHeading
-                eyebrow={isEnglish ? "Selected work" : "Geselecteerd werk"}
-                title={
-                  isEnglish
-                    ? "Premium visual direction for construction, renovation and prefab brands."
-                    : "Premium visuele richting voor bouw, renovatie en prefabmerken."
-                }
-                body={
-                  isEnglish
-                    ? "A calm editorial composition gives the work more authority and turns this section into a stronger trust and conversion moment."
-                    : "Een rustige redactionele compositie geeft het werk meer autoriteit en maakt van deze sectie een sterker moment voor vertrouwen en conversie."
-                }
-              />
-            </div>
-
-            <div className="grid gap-6 lg:grid-cols-2">
-              {topShowcaseAssets.map((asset) => (
-                <MediaCard key={asset.id} asset={asset} className="h-full" />
+            <SectionHeading
+              eyebrow={isEnglish ? "Who it is for" : "Voor wie"}
+              title={
+                isEnglish
+                  ? "Built for companies that want more serious project inquiries, not more empty reach."
+                  : "Gemaakt voor bedrijven die meer serieuze projectaanvragen willen, niet meer losse zichtbaarheid."
+              }
+              body={
+                isEnglish
+                  ? "BouwReach is not for general branding projects. It is for construction related companies that want sharper positioning, stronger trust and a better inquiry flow."
+                  : "BouwReach is niet bedoeld voor algemene brandingtrajecten. Het is voor bouwgerelateerde bedrijven die scherpere positionering, meer vertrouwen en een betere aanvraagstroom willen."
+              }
+            />
+            <div className="mt-8 grid gap-4">
+              {[
+                {
+                  title: isEnglish ? "Construction and renovation companies" : "Bouw en renovatiebedrijven",
+                  body: isEnglish
+                    ? "For businesses that already do strong work but need a clearer story and a more convincing sales path."
+                    : "Voor bedrijven die goed werk leveren maar een duidelijker verhaal en een overtuigender salespad nodig hebben.",
+                },
+                {
+                  title: isEnglish ? "Prefab and modular specialists" : "Prefab en modulaire specialisten",
+                  body: isEnglish
+                    ? "For teams that need trust quickly because the offer is technical, high value and often compared carefully."
+                    : "Voor teams die snel vertrouwen moeten opbouwen omdat het aanbod technisch is, veel waarde heeft en kritisch wordt vergeleken.",
+                },
+                {
+                  title: isEnglish ? "Window, facade and exterior suppliers" : "Kozijn, gevel en buitenschilbedrijven",
+                  body: isEnglish
+                    ? "For companies that need better local visibility, better proof and landing pages that push toward contact."
+                    : "Voor bedrijven die betere lokale zichtbaarheid, sterker bewijs en landingspagina's nodig hebben die richting contact sturen.",
+                },
+              ].map((item) => (
+                <article key={item.title} className="rounded-[24px] border border-[var(--border)] bg-white/78 p-5">
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.body}</p>
+                </article>
               ))}
             </div>
+          </div>
 
-            <div className="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-              <article className="panel relative flex h-full flex-col justify-between overflow-hidden rounded-[32px] border border-[rgba(16,16,16,0.1)] px-6 py-7 md:px-8 md:py-8">
-                <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
-                  <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[rgba(16,16,16,0.78)]">
-                    {isEnglish ? "CTA media" : "CTA media"}
-                  </p>
-                  <h3 className="mt-5 max-w-[12ch] font-[var(--font-display)] text-4xl font-semibold leading-[1.02] tracking-[-0.04em] md:text-5xl">
-                    {isEnglish
-                      ? "Premium visuals that help serious projects sell faster."
-                      : "Premium visuals die serieuze projecten sneller helpen verkopen."}
-                  </h3>
-                  <p className="mt-5 max-w-xl text-base leading-7 text-[var(--muted)] md:text-lg">
-                    {isEnglish
-                      ? "We create visual content for renovation, prefab and construction brands that need trust, clarity and stronger market presence."
-                      : "Wij maken visuele content voor renovatie, prefab en bouwmerken die vertrouwen, helderheid en een sterkere marktpositie nodig hebben."}
-                  </p>
-                </div>
+          {featuredVisual ? (
+            <MediaCard
+              asset={featuredVisual}
+              priority
+              locale={locale}
+              eyebrow={isEnglish ? "Positioning support" : "Positioneringsondersteuning"}
+              title={
+                isEnglish
+                  ? "Your presentation should help a buyer trust the company faster."
+                  : "Je presentatie moet ervoor zorgen dat een koper het bedrijf sneller vertrouwt."
+              }
+              body={
+                isEnglish
+                  ? "Good project visuals are not the product. They support the message, remove doubt and make the offer feel more serious."
+                  : "Goede projectbeelden zijn niet het product. Ze ondersteunen de boodschap, nemen twijfel weg en laten het aanbod serieuzer voelen."
+              }
+              className="h-full"
+            />
+          ) : null}
+        </div>
+      </section>
 
-                <div className="mt-8 space-y-4">
-                  <a
-                    href={isEnglish ? "/en/contact" : "/contact"}
-                    className="inline-flex w-fit items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black"
-                  >
-                    {isEnglish ? "Book a strategy call" : "Plan een strategiesessie"}
-                  </a>
-                  <p className="text-sm leading-6 text-[rgba(16,16,16,0.68)]">
-                    {isEnglish
-                      ? "Real sites. Real footage. Premium positioning."
-                      : "Echte locaties. Echt beeld. Premium positionering."}
-                  </p>
-                </div>
-              </article>
-
-              <div className="relative">
-                <MediaCard asset={bottomFeatureAsset} className="h-full" />
-                <div className="pointer-events-none absolute bottom-4 left-4 hidden max-w-[220px] rounded-[22px] border border-white/50 bg-white/84 p-4 shadow-[0_20px_50px_rgba(16,16,16,0.14)] backdrop-blur md:block">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[rgba(16,16,16,0.7)]">
-                    {isEnglish ? "Project proof" : "Projectbewijs"}
-                  </p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-[var(--foreground)]">
-                    {isEnglish
-                      ? "Selected visuals are framed to build trust before the conversation starts."
-                      : "Geselecteerde visuals zijn gekaderd om vertrouwen op te bouwen voordat het gesprek begint."}
-                  </p>
-                </div>
-              </div>
+      <section className="section-shell pt-24">
+        <div className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-stretch">
+          <div className="panel rounded-[36px] px-6 py-8 md:px-8 md:py-10">
+            <SectionHeading
+              eyebrow={isEnglish ? "What BouwReach does" : "Wat BouwReach doet"}
+              title={
+                isEnglish
+                  ? "Everything is built around a simpler route from visibility to inquiry."
+                  : "Alles wordt ingericht rond een eenvoudigere route van zichtbaarheid naar aanvraag."
+              }
+              body={
+                isEnglish
+                  ? "The work is not a stack of random marketing tasks. It is one commercial system with three clear jobs."
+                  : "Het werk is geen stapel losse marketingtaken. Het is één commercieel systeem met drie duidelijke functies."
+              }
+            />
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  title: isEnglish ? "Sharpen the message" : "Boodschap aanscherpen",
+                  body: isEnglish
+                    ? "Make it clear who you work for, which projects you want and why your company is worth the conversation."
+                    : "Maak duidelijk voor wie je werkt, welke projecten je zoekt en waarom jouw bedrijf het gesprek waard is.",
+                },
+                {
+                  title: isEnglish ? "Build trust faster" : "Sneller vertrouwen opbouwen",
+                  body: isEnglish
+                    ? "Use real project proof, clear content and relevant campaigns so serious buyers stay engaged."
+                    : "Gebruik echt projectbewijs, heldere content en relevante campagnes zodat serieuze kopers aangehaakt blijven.",
+                },
+                {
+                  title: isEnglish ? "Turn traffic into contact" : "Verkeer omzetten in contact",
+                  body: isEnglish
+                    ? "Send people to pages that answer objections, guide the next step and create more qualified inquiries."
+                    : "Stuur mensen naar pagina's die bezwaren wegnemen, de volgende stap begeleiden en meer gekwalificeerde aanvragen opleveren.",
+                },
+              ].map((item) => (
+                <article key={item.title} className="rounded-[24px] border border-[var(--border)] bg-[rgba(18,18,18,0.03)] p-5">
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{item.body}</p>
+                </article>
+              ))}
             </div>
           </div>
-        </section>
-      ) : null}
 
-      {ugcAssets.length ? (
-        <section className="section-shell pt-24">
-          <div className="relative overflow-hidden rounded-[40px] bg-[linear-gradient(180deg,#0f0f0f,#171717)] px-6 py-12 md:px-10">
+          {proofVisual ? (
+            <MediaCard
+              asset={proofVisual}
+              locale={locale}
+              eyebrow={isEnglish ? "Trust layer" : "Vertrouwenslaag"}
+              title={
+                isEnglish
+                  ? "Real footage works when it proves delivery instead of filling space."
+                  : "Echt beeld werkt wanneer het levering bewijst in plaats van ruimte opvult."
+              }
+              body={
+                isEnglish
+                  ? "Images and footage support sales when they show execution, context and proof that the company actually delivers."
+                  : "Beeld ondersteunt sales wanneer het uitvoering, context en bewijs laat zien dat het bedrijf echt levert."
+              }
+              className="h-full"
+            />
+          ) : null}
+        </div>
+      </section>
+
+      <section className="section-shell pt-24">
+        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
+          <div className="space-y-6">
+            <SectionHeading
+              eyebrow={isEnglish ? "Proof from real projects" : "Bewijs uit echte projecten"}
+              title={
+                isEnglish
+                  ? "Trust grows faster when prospects can see result and execution side by side."
+                  : "Vertrouwen groeit sneller wanneer prospects resultaat en uitvoering naast elkaar kunnen zien."
+              }
+              body={
+                isEnglish
+                  ? "Good proof is practical. It shows what changed, how the work looks and why the company deserves the inquiry."
+                  : "Goed bewijs is praktisch. Het laat zien wat er veranderde, hoe het werk eruitziet en waarom het bedrijf de aanvraag verdient."
+              }
+            />
+            {comparisonVisuals.length ? (
+              <div className="grid gap-6 md:grid-cols-2">
+                {comparisonVisuals.map((asset, index) => (
+                  <MediaCard
+                    key={asset.id}
+                    asset={asset}
+                    locale={locale}
+                    title={
+                      isEnglish
+                        ? index === 0
+                          ? "Before and after makes the value of the work obvious."
+                          : "Project proof removes doubt much faster than broad claims."
+                        : index === 0
+                          ? "Voor en na maakt de waarde van het werk direct zichtbaar."
+                          : "Projectbewijs haalt twijfel sneller weg dan brede claims."
+                    }
+                    body={
+                      isEnglish
+                        ? index === 0
+                          ? "Visitors do not have to guess what changed. They can see the difference immediately."
+                          : "Concrete proof helps the right prospect understand quality, scope and seriousness at a glance."
+                        : index === 0
+                          ? "Bezoekers hoeven niet te raden wat er veranderde. Ze zien het verschil direct."
+                          : "Concreet bewijs helpt de juiste prospect in één oogopslag kwaliteit, omvang en sérieux te begrijpen."
+                    }
+                  />
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <article className="panel relative overflow-hidden rounded-[36px] bg-[var(--dark)] px-6 py-8 text-white md:px-8 md:py-10">
             <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
               <BrandLogo variant="mark-white" alt="" className="w-16 md:w-20" />
             </div>
-            <div className="max-w-3xl">
-              <SectionHeading
-                eyebrow={isEnglish ? "User generated content" : "User generated content"}
-                title={isEnglish ? "User generated content that adds trust." : "User generated content die vertrouwen toevoegt."}
-                body={
-                  isEnglish
-                    ? "On-site footage, testimonial style clips and project proof use dynamic cards with readable overlays and real context."
-                    : "On-site footage, testimonialachtige clips en projectbewijs krijgen dynamische kaarten met leesbare overlays en echte context."
-                }
-                theme="dark"
-              />
+            <SectionHeading
+              eyebrow={isEnglish ? "Next step" : "Volgende stap"}
+              title={
+                isEnglish
+                  ? "More visibility only matters when it leads to better conversations."
+                  : "Meer zichtbaarheid telt pas wanneer het leidt tot betere gesprekken."
+              }
+              body={
+                isEnglish
+                  ? "We review where trust is leaking, where the message is too broad and where inquiries are being lost right now."
+                  : "We kijken waar vertrouwen weglekt, waar de boodschap te breed is en waar nu aanvragen verloren gaan."
+              }
+              theme="dark"
+            />
+            <div className="mt-8 rounded-[24px] border border-white/10 bg-white/6 p-5">
+              <p className="text-sm leading-6 text-white/72">
+                {isEnglish
+                  ? "Clear advice first. Then we decide whether a package makes sense for your situation."
+                  : "Eerst duidelijk advies. Daarna bepalen we of een pakket logisch is voor jouw situatie."}
+              </p>
             </div>
-            <div className="mt-10 grid gap-6 lg:grid-cols-3">
-              {ugcAssets.map((asset) => (
-                <MediaCard key={asset.id} asset={asset} />
-              ))}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={isEnglish ? "/en/contact" : "/contact"}
+                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[rgba(255,255,255,0.9)]"
+              >
+                {isEnglish ? "Book a free analysis" : "Plan een gratis analyse"}
+              </Link>
+              <Link
+                href={isEnglish ? "/en/packages" : "/pakketten"}
+                className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[var(--foreground)]"
+              >
+                {isEnglish ? "View packages" : "Bekijk de pakketten"}
+              </Link>
             </div>
-          </div>
-        </section>
-      ) : null}
-
-      {caseStudyAssets.length ? (
-        <section className="section-shell pt-24">
-          <SectionHeading
-            eyebrow={isEnglish ? "Case studies" : "Case studies"}
-            title={
-              isEnglish
-                ? "Comparison and progress assets tell the project story."
-                : "Vergelijking en voortgangsassets vertellen het projectverhaal."
-            }
-            body={
-              isEnglish
-                ? "Before and after content gets split framing automatically, while installation moments move into a proof led narrative section."
-                : "Voor en na content krijgt automatisch een split frame, terwijl installatiemomenten in een bewijsgerichte verhaallijn komen."
-            }
-          />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {caseStudyAssets.map((asset) => (
-              <MediaCard key={asset.id} asset={asset} />
-            ))}
-          </div>
-        </section>
-      ) : null}
+            <p className="mt-4 text-sm leading-6 text-white/62">
+              {isEnglish
+                ? "Built for construction, prefab, window, facade and renovation companies."
+                : "Gemaakt voor bouw, prefab, kozijnen, gevel en renovatiebedrijven."}
+            </p>
+          </article>
+        </div>
+      </section>
     </>
   );
 }

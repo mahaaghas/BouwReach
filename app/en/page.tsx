@@ -148,9 +148,9 @@ export default function EnglishHomePage() {
       <section id="approach" className="section-shell scroll-mt-32 pt-24">
         <div className="panel rounded-[40px] px-6 py-10 md:px-10 md:py-14">
           <SectionHeading
-            eyebrow="Approach"
-            title="BouwReach aligns everything around inquiries."
-            body="No scattered activity. No noise. We build a system that connects visibility to trust and conversion."
+            eyebrow="How it works"
+            title="One fixed system of message, proof and conversion."
+            body="No scattered activity. We connect positioning, proof and landing pages to a clearer route toward inquiry."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {pillars.map((pillar) => (
@@ -203,6 +203,28 @@ export default function EnglishHomePage() {
             body="We combine positioning, content, ads and conversion focused pages to help construction companies generate more serious inquiries."
             theme="dark"
           />
+        </div>
+      </section>
+
+      <section className="section-shell pt-24">
+        <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
+          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
+            <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
+          </div>
+          <SectionHeading
+            eyebrow="Analysis"
+            title="Curious how many inquiries you are missing right now?"
+            body="We review your current situation for free and show where the strongest gains are in message, trust and conversion."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/en/contact">Book a free analysis</Button>
+            <Button href="/en/packages" variant="secondary">
+              View packages
+            </Button>
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+            Built for construction, prefab, window, facade and renovation companies that want a more serious flow of project inquiries.
+          </p>
         </div>
       </section>
     </div>

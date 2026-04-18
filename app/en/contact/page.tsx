@@ -22,20 +22,20 @@ export default function EnglishContactPage() {
           <SectionHeading
             eyebrow="Contact"
             title="Book a free analysis"
-            body="Briefly tell us where you are now and where you want more inquiries to come from."
+            body="For construction, prefab, window, facade and renovation companies that want stronger visibility and more serious project inquiries."
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Step 1</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">We look at where your current visibility is leaking opportunities.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">What we review</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Your message, current visibility and where inquiries are getting lost right now.</p>
             </div>
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Step 2</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">We show what needs to be sharpened first.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">What you get back</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">A direct read on the biggest missed opportunities and what needs sharpening first.</p>
             </div>
             <div className="rounded-[24px] border border-[rgba(18,18,18,0.1)] bg-white/74 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Step 3</p>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Then we decide which package makes sense.</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">What happens next</p>
+              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">Only then do we decide whether a package makes sense for your situation.</p>
             </div>
           </div>
           <div className="mt-10 space-y-5 rounded-[28px] bg-[var(--dark)] p-6 text-white">
@@ -48,7 +48,7 @@ export default function EnglishContactPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--gold)]">What you get</p>
               <p className="mt-2 text-sm leading-6 text-white/74">
-                A direct look at your current approach, the biggest missed opportunities and which package fits best.
+                A direct look at your current approach, the biggest missed opportunities and which next step is commercially strongest.
               </p>
             </div>
           </div>

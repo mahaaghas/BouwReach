@@ -7,40 +7,61 @@ export const metadata = createMetadata({
   pathname: "/privacy",
 });
 
+const sections = [
+  {
+    title: "Verwerkingsverantwoordelijke",
+    body: "BouwReach is verantwoordelijk voor de verwerking van persoonsgegevens die via deze website worden aangeleverd. Deze privacyverklaring geldt voor aanvragen, contactverzoeken en basiswebsitegebruik via bouwreach.nl.",
+  },
+  {
+    title: "Welke gegevens we verwerken",
+    body: "Via het contactformulier verwerken we naam, bedrijfsnaam, website, telefoonnummer, e mailadres en de inhoud van het bericht. Als je de website gebruikt, kunnen daarnaast functionele en beperkte analytische gegevens worden verwerkt om de site goed te laten werken en te verbeteren.",
+  },
+  {
+    title: "Waarom we deze gegevens verwerken",
+    body: "We gebruiken persoonsgegevens alleen om aanvragen op te volgen, contact op te nemen, de inhoud van een gratis analyse te beoordelen, dienstverlening voor te bereiden en basiscommunicatie over een mogelijke samenwerking te voeren.",
+  },
+  {
+    title: "Grondslag voor verwerking",
+    body: "BouwReach verwerkt persoonsgegevens op basis van gerechtvaardigd belang en op basis van jouw eigen aanvraag of contactverzoek. Zonder deze gegevens kunnen we je aanvraag niet goed beoordelen of opvolgen.",
+  },
+  {
+    title: "Bewaartermijnen",
+    body: "Aanvraaggegevens worden niet langer bewaard dan nodig is voor opvolging, interne beoordeling en normale commerciële correspondentie. Wanneer gegevens niet meer relevant zijn voor contact of samenwerking, worden ze verwijderd of geanonimiseerd.",
+  },
+  {
+    title: "Delen met derden",
+    body: "Gegevens worden niet verkocht. Ze worden alleen gedeeld met partijen die nodig zijn voor hosting, formulieren, websitebeheer of communicatie, en alleen voor zover dat nodig is om de website en opvolging goed te laten werken.",
+  },
+  {
+    title: "Beveiliging",
+    body: "BouwReach neemt passende technische en organisatorische maatregelen om persoonsgegevens te beschermen tegen verlies, misbruik of ongeautoriseerde toegang. Denk aan beperkte toegang, veilige hosting en zorgvuldige verwerking van aanvragen.",
+  },
+  {
+    title: "Jouw rechten",
+    body: "Je kunt verzoeken om inzage, correctie, verwijdering of beperking van je persoonsgegevens. Ook kun je bezwaar maken tegen verwerking. Voor zulke verzoeken kun je contact opnemen via de contactpagina.",
+  },
+  {
+    title: "Vragen of verzoeken",
+    body: "Heb je vragen over privacy of wil je een verzoek indienen over jouw gegevens, gebruik dan de contactpagina. Vermeld duidelijk om welk verzoek het gaat, zodat we je sneller kunnen helpen.",
+  },
+];
+
 export default function PrivacyPage() {
   return (
     <div className="section-shell pb-8 pt-10">
       <section className="panel rounded-[40px] px-6 py-12 md:px-10 md:py-16">
         <SectionHeading
           eyebrow="Privacy"
-          title="Privacypagina"
-          body="We houden persoonsgegevens zo beperkt mogelijk en gebruiken ze alleen om contact op te nemen over je aanvraag."
+          title="Privacyverklaring"
+          body="BouwReach verwerkt persoonsgegevens zorgvuldig en zo beperkt mogelijk. Hieronder staat welke gegevens we gebruiken, waarom we dat doen en hoe je een verzoek kunt indienen."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <article className="rounded-[28px] border border-[var(--border)] bg-white/80 p-6">
-            <h2 className="font-[var(--font-display)] text-2xl font-semibold">Welke gegevens we bewaren</h2>
-            <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-              Naam, bedrijfsnaam, website, telefoonnummer, e mail en de inhoud van je bericht als je het contactformulier invult.
-            </p>
-          </article>
-          <article className="rounded-[28px] border border-[var(--border)] bg-white/80 p-6">
-            <h2 className="font-[var(--font-display)] text-2xl font-semibold">Waarom we dit doen</h2>
-            <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-              Alleen om je aanvraag op te volgen, contact op te nemen en te bepalen welke aanpak het beste bij jouw situatie past.
-            </p>
-          </article>
-          <article className="rounded-[28px] border border-[var(--border)] bg-white/80 p-6">
-            <h2 className="font-[var(--font-display)] text-2xl font-semibold">Wat we niet doen</h2>
-            <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-              We verkopen je gegevens niet door en gebruiken ze niet voor irrelevante nieuwsbrieven of brede marketinglijsten.
-            </p>
-          </article>
-          <article className="rounded-[28px] border border-[var(--border)] bg-white/80 p-6">
-            <h2 className="font-[var(--font-display)] text-2xl font-semibold">Vragen over privacy</h2>
-            <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-              Wil je weten welke gegevens we van je hebben of wil je iets laten verwijderen, neem dan contact op via de contactpagina.
-            </p>
-          </article>
+          {sections.map((section) => (
+            <article key={section.title} className="rounded-[28px] border border-[var(--border)] bg-white/80 p-6">
+              <h2 className="font-[var(--font-display)] text-2xl font-semibold">{section.title}</h2>
+              <p className="mt-4 text-base leading-7 text-[var(--muted)]">{section.body}</p>
+            </article>
+          ))}
         </div>
       </section>
     </div>

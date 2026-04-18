@@ -147,9 +147,9 @@ export default function Home() {
       <section id="aanpak" className="section-shell scroll-mt-32 pt-24">
         <div className="panel rounded-[40px] px-6 py-10 md:px-10 md:py-14">
           <SectionHeading
-            eyebrow="Aanpak"
-            title="BouwReach richt alles op aanvragen."
-            body="Geen losse acties. Geen ruis. We bouwen een systeem dat zichtbaarheid koppelt aan vertrouwen en conversie."
+            eyebrow="Zo werkt het"
+            title="Een vast systeem van boodschap, bewijs en conversie."
+            body="Geen losse acties. We koppelen positionering, bewijs en landingspagina's aan een duidelijk pad richting aanvraag."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {pillars.map((pillar) => (
@@ -202,6 +202,28 @@ export default function Home() {
             body="We combineren positionering, content, advertenties en conversiegerichte pagina&apos;s om bouwbedrijven te helpen aan meer serieuze aanvragen."
             theme="dark"
           />
+        </div>
+      </section>
+
+      <section className="section-shell pt-24">
+        <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
+          <div className="pointer-events-none absolute right-8 top-8 opacity-[0.05]">
+            <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
+          </div>
+          <SectionHeading
+            eyebrow="Analyse"
+            title="Benieuwd hoeveel aanvragen je nu mist?"
+            body="We kijken gratis naar je huidige situatie en laten zien waar de grootste winst zit in boodschap, vertrouwen en conversie."
+          />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/contact">Plan een gratis analyse</Button>
+            <Button href="/pakketten" variant="secondary">
+              Bekijk de pakketten
+            </Button>
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+            Voor bouw, prefab, kozijnen, gevel en renovatiebedrijven die een serieuzere instroom van projectaanvragen willen.
+          </p>
         </div>
       </section>
     </div>
