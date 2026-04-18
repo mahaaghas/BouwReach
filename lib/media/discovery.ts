@@ -1,136 +1,58 @@
-import fs from "fs";
-import path from "path";
 import { classifyMedia, deriveAltText } from "@/lib/media/classifier";
-import type { HomepagePlacement, MediaAsset, MediaKind, MediaSidecar, MediaSourceGroup } from "@/lib/media/types";
-
-const PROJECT_ROOT = /*turbopackIgnore: true*/ process.cwd();
-const ASSET_ROOT = path.join(PROJECT_ROOT, "public", "media");
-const STATIC_MEDIA_DIRECTORIES = {
-  visualImages: path.join(PROJECT_ROOT, "public", "media", "visual", "pictures"),
-  visualImagesAlt: path.join(PROJECT_ROOT, "public", "media", "visual", "images"),
-  visualVideos: path.join(PROJECT_ROOT, "public", "media", "visual", "videos"),
-  ugcImages: path.join(PROJECT_ROOT, "public", "media", "ugc", "pictures"),
-  ugcImagesAlt: path.join(PROJECT_ROOT, "public", "media", "ugc", "images"),
-  ugcVideos: path.join(PROJECT_ROOT, "public", "media", "ugc", "videos"),
-} as const;
-const MEDIA_EXTENSIONS: Record<MediaKind, string[]> = {
-  image: [".jpg", ".jpeg", ".png", ".webp", ".avif"],
-  video: [".mp4", ".mov", ".webm"],
-};
+import { mediaManifest } from "@/lib/media/manifest";
+import type { HomepagePlacement, MediaAsset, MediaSidecar, MediaSourceGroup } from "@/lib/media/types";
 
 let cachedAssets: MediaAsset[] | null = null;
 let cachedHomepageCollections: ReturnType<typeof buildHomepageMediaCollections> | null = null;
 
-function isLogoAssetPath(filePath: string) {
-  const normalizedPath = filePath.split(path.sep).join("/").toLowerCase();
-  return normalizedPath.includes("/public/media/logos/") || normalizedPath.includes("/media/logos/");
-}
-
-function readOptionalSidecar(filePath: string): MediaSidecar | undefined {
-  const sidecarPath = filePath.replace(/\.[^.]+$/, ".json");
-  if (!fs.existsSync(sidecarPath)) {
-    return undefined;
-  }
-
-  try {
-    return JSON.parse(fs.readFileSync(sidecarPath, "utf8")) as MediaSidecar;
-  } catch {
-    return undefined;
-  }
-}
-
-function toPublicMediaPath(filePath: string) {
-  const relativePath = path.relative(ASSET_ROOT, filePath).split(path.sep).join("/");
-  return `/media/${relativePath}`;
-}
-
 function sourceGroupFromPath(filePath: string): MediaSourceGroup {
-  return filePath.includes(`${path.sep}ugc${path.sep}`) ? "ugc" : "visual";
+  return filePath.includes("/ugc/") ? "ugc" : "visual";
 }
 
-function collectMediaFiles(kind: MediaKind) {
-  const filePaths: string[] = [];
-
-  const directories =
-    kind === "image"
-      ? [STATIC_MEDIA_DIRECTORIES.visualImages, STATIC_MEDIA_DIRECTORIES.visualImagesAlt, STATIC_MEDIA_DIRECTORIES.ugcImages, STATIC_MEDIA_DIRECTORIES.ugcImagesAlt]
-      : [STATIC_MEDIA_DIRECTORIES.visualVideos, STATIC_MEDIA_DIRECTORIES.ugcVideos];
-
-  for (const directory of directories) {
-    if (!fs.existsSync(directory)) {
-      continue;
-    }
-
-    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-      if (!entry.isFile()) {
-        continue;
-      }
-
-      const fullPath = path.join(directory, entry.name);
-      if (isLogoAssetPath(fullPath)) {
-        continue;
-      }
-
-      if (MEDIA_EXTENSIONS[kind].includes(path.extname(entry.name).toLowerCase())) {
-        filePaths.push(fullPath);
-      }
-    }
+function inferPosterSrc(src: string, sourceGroup: MediaSourceGroup) {
+  const basename = src.replace(/\.[^.]+$/i, "").split("/").pop();
+  if (!basename) {
+    return undefined;
   }
 
-  return filePaths;
+  const candidateBase =
+    sourceGroup === "visual" ? `/media/visual/pictures/${basename}` : `/media/ugc/pictures/${basename}`;
+
+  const match = mediaManifest.find(
+    (entry) =>
+      entry.kind === "image" &&
+      (entry.src === `${candidateBase}.jpg` ||
+        entry.src === `${candidateBase}.jpeg` ||
+        entry.src === `${candidateBase}.png` ||
+        entry.src === `${candidateBase}.webp` ||
+        entry.src === `${candidateBase}.avif`)
+  );
+
+  return match?.src;
 }
 
-function inferPosterSrc(filePath: string, sourceGroup: MediaSourceGroup, sidecar?: MediaSidecar) {
-  if (sidecar?.poster) {
-    return sidecar.poster;
-  }
-
-  const basename = path.basename(filePath, path.extname(filePath));
-  const candidateDirectories =
-    sourceGroup === "visual"
-      ? [STATIC_MEDIA_DIRECTORIES.visualImages, STATIC_MEDIA_DIRECTORIES.visualImagesAlt]
-      : [STATIC_MEDIA_DIRECTORIES.ugcImages, STATIC_MEDIA_DIRECTORIES.ugcImagesAlt];
-
-  for (const directory of candidateDirectories) {
-    if (!fs.existsSync(directory)) continue;
-
-    for (const extension of MEDIA_EXTENSIONS.image) {
-      const candidate = path.join(directory, `${basename}${extension}`);
-      if (fs.existsSync(candidate)) {
-        return toPublicMediaPath(candidate);
-      }
-    }
-  }
-
-  const accent = sourceGroup === "visual" ? "c8ff43" : "101010";
-  const background = sourceGroup === "visual" ? "101010" : "f4f3ee";
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800"><rect width="100%" height="100%" fill="#${background}"/><rect x="56" y="56" width="1088" height="688" rx="44" fill="none" stroke="#${accent}" stroke-width="4"/><text x="72" y="120" fill="#${accent}" font-family="Arial, sans-serif" font-size="34" letter-spacing="6">BOUWREACH MEDIA</text></svg>`;
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-}
-
-function createAsset(filePath: string, kind: MediaKind): MediaAsset {
-  const sidecar = readOptionalSidecar(filePath);
-  const filename = path.basename(filePath);
-  const sourceGroup = sourceGroupFromPath(filePath);
-  const alt = deriveAltText(filename, sidecar);
+function createAsset(entry: (typeof mediaManifest)[number]): MediaAsset {
+  const sidecar: MediaSidecar | undefined = undefined;
+  const sourceGroup = sourceGroupFromPath(entry.folderPath);
+  const alt = deriveAltText(entry.filename, sidecar);
   const classification = classifyMedia({
     alt,
-    filename,
-    folderPath: filePath,
-    kind,
+    filename: entry.filename,
+    folderPath: entry.folderPath,
+    kind: entry.kind,
     sourceGroup,
     sidecar,
   });
 
   return {
-    id: path.relative(ASSET_ROOT, filePath).replace(/[\\/]/g, "-"),
-    kind,
-    src: toPublicMediaPath(filePath),
+    id: entry.src.replace(/[\\/]/g, "-"),
+    kind: entry.kind,
+    src: entry.src,
     alt,
-    title: sidecar?.title ?? alt,
-    filename,
-    folderPath: path.relative(ASSET_ROOT, path.dirname(filePath)),
-    posterSrc: kind === "video" ? inferPosterSrc(filePath, sourceGroup, sidecar) : undefined,
+    title: alt,
+    filename: entry.filename,
+    folderPath: entry.folderPath,
+    posterSrc: entry.kind === "video" ? inferPosterSrc(entry.src, sourceGroup) : undefined,
     sidecar,
     classification,
   };
@@ -138,10 +60,9 @@ function createAsset(filePath: string, kind: MediaKind): MediaAsset {
 
 export function getAllMediaAssets() {
   if (!cachedAssets) {
-    cachedAssets = [
-      ...collectMediaFiles("image").map((file) => createAsset(file, "image")),
-      ...collectMediaFiles("video").map((file) => createAsset(file, "video")),
-    ].filter((asset) => !isLogoAssetPath(asset.folderPath) && !asset.filename.toLowerCase().includes("logo"));
+    cachedAssets = mediaManifest
+      .filter((entry) => !entry.filename.toLowerCase().includes("logo"))
+      .map((entry) => createAsset(entry));
   }
 
   return cachedAssets;
