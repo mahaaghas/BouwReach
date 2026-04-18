@@ -4,14 +4,14 @@ import { classifyMedia, deriveAltText } from "@/lib/media/classifier";
 import type { HomepagePlacement, MediaAsset, MediaKind, MediaSidecar, MediaSourceGroup } from "@/lib/media/types";
 
 const PROJECT_ROOT = /*turbopackIgnore: true*/ process.cwd();
-const ASSET_ROOT = path.join(PROJECT_ROOT, "assets");
+const ASSET_ROOT = path.join(PROJECT_ROOT, "public", "media");
 const STATIC_MEDIA_DIRECTORIES = {
-  visualImages: path.join(PROJECT_ROOT, "assets", "visual", "pictures"),
-  visualImagesAlt: path.join(PROJECT_ROOT, "assets", "visual", "images"),
-  visualVideos: path.join(PROJECT_ROOT, "assets", "visual", "videos"),
-  ugcImages: path.join(PROJECT_ROOT, "assets", "ugc", "pictures"),
-  ugcImagesAlt: path.join(PROJECT_ROOT, "assets", "ugc", "images"),
-  ugcVideos: path.join(PROJECT_ROOT, "assets", "ugc", "videos"),
+  visualImages: path.join(PROJECT_ROOT, "public", "media", "visual", "pictures"),
+  visualImagesAlt: path.join(PROJECT_ROOT, "public", "media", "visual", "images"),
+  visualVideos: path.join(PROJECT_ROOT, "public", "media", "visual", "videos"),
+  ugcImages: path.join(PROJECT_ROOT, "public", "media", "ugc", "pictures"),
+  ugcImagesAlt: path.join(PROJECT_ROOT, "public", "media", "ugc", "images"),
+  ugcVideos: path.join(PROJECT_ROOT, "public", "media", "ugc", "videos"),
 } as const;
 const MEDIA_EXTENSIONS: Record<MediaKind, string[]> = {
   image: [".jpg", ".jpeg", ".png", ".webp", ".avif"],
@@ -23,7 +23,7 @@ let cachedHomepageCollections: ReturnType<typeof buildHomepageMediaCollections> 
 
 function isLogoAssetPath(filePath: string) {
   const normalizedPath = filePath.split(path.sep).join("/").toLowerCase();
-  return normalizedPath.includes("/assets/logos/") || normalizedPath.includes("/logos/");
+  return normalizedPath.includes("/public/media/logos/") || normalizedPath.includes("/media/logos/");
 }
 
 function readOptionalSidecar(filePath: string): MediaSidecar | undefined {
