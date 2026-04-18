@@ -78,7 +78,7 @@ export function PackageRevealCard({ name, teaser, price }: PackageRevealCardProp
           </Link>
         </span>
         <span className="mt-auto block text-sm font-semibold uppercase tracking-[0.12em] text-[var(--foreground)]/70">
-          {isEnglish ? "Tap or click for price" : "Tik of klik voor prijs"}
+          {isEnglish ? "Open package" : "Open pakket"}
         </span>
       </span>
     </article>

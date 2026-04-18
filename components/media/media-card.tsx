@@ -38,7 +38,7 @@ function getContentTypeLabel(contentType: MediaContentType, locale: "nl" | "en")
       "clean-branding-visual": "Projectbeeld",
     },
     en: {
-      "premium-architectural": "Project visual",
+      "premium-architectural": "Project proof",
       "product-detail": "Detail",
       "team-process": "Process",
       "on-site-footage": "On site",
@@ -46,8 +46,8 @@ function getContentTypeLabel(contentType: MediaContentType, locale: "nl" | "en")
       "before-after": "Before and after",
       "installation-moment": "Execution",
       "social-proof": "Project proof",
-      "raw-ugc-vertical": "Real footage",
-      "clean-branding-visual": "Project visual",
+      "raw-ugc-vertical": "On site proof",
+      "clean-branding-visual": "Project proof",
     },
   } as const;
 
@@ -69,7 +69,7 @@ function getSafeOverlayTitle(contentType: MediaContentType, locale: "nl" | "en")
       "clean-branding-visual": "Projectbeeld dat je aanbod direct serieuzer positioneert.",
     },
     en: {
-      "premium-architectural": "Strong project visuals build trust immediately.",
+      "premium-architectural": "Strong project proof builds trust immediately.",
       "product-detail": "Details make quality and finish believable.",
       "team-process": "Showing the process strengthens trust.",
       "on-site-footage": "",
@@ -78,7 +78,7 @@ function getSafeOverlayTitle(contentType: MediaContentType, locale: "nl" | "en")
       "installation-moment": "",
       "social-proof": "",
       "raw-ugc-vertical": "",
-      "clean-branding-visual": "Project visuals position the offer more credibly.",
+      "clean-branding-visual": "Project proof positions the offer more credibly.",
     },
   } as const;
 
@@ -132,7 +132,7 @@ function getDefaultCopy(contentType: MediaContentType, locale: "nl" | "en") {
     en: {
       "premium-architectural": {
         title: "Work that builds trust before someone gets in touch.",
-        body: "Strong project visuals support positioning and make it clear that you handle serious assignments.",
+        body: "Strong project proof supports positioning and makes it clear that you handle serious assignments.",
       },
       "product-detail": {
         title: "Details make craftsmanship believable.",
@@ -143,7 +143,7 @@ function getDefaultCopy(contentType: MediaContentType, locale: "nl" | "en") {
         body: "The result matters, but execution footage also shows how seriously and carefully your team works.",
       },
       "on-site-footage": {
-        title: "Real footage from site and execution builds trust fast.",
+        title: "Real proof from site and execution builds trust fast.",
         body: "On-site visuals show that you are not selling a polished story. You are showing real delivery.",
       },
       "testimonial-style": {

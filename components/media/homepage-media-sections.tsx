@@ -91,7 +91,7 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
               }
               body={
                 isEnglish
-                  ? "Good project visuals are not the product. They support the message, remove doubt and make the offer feel more serious."
+                  ? "Good project proof is not the product. It supports the message, removes doubt and makes the offer feel more serious."
                   : "Goede projectbeelden zijn niet het product. Ze ondersteunen de boodschap, nemen twijfel weg en laten het aanbod serieuzer voelen."
               }
               className="h-full"
@@ -152,7 +152,7 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
               eyebrow={isEnglish ? "Trust layer" : "Vertrouwenslaag"}
               title={
                 isEnglish
-                  ? "Real footage works when it proves delivery instead of filling space."
+                  ? "Real proof works when it shows delivery instead of filling space."
                   : "Echt beeld werkt wanneer het levering bewijst in plaats van ruimte opvult."
               }
               body={
