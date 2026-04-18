@@ -167,7 +167,7 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
       </section>
 
       <section className="section-shell pt-24">
-        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
+        <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start">
           <div className="space-y-6">
             <SectionHeading
               eyebrow={isEnglish ? "Proof from real projects" : "Bewijs uit echte projecten"}
@@ -213,46 +213,62 @@ export function HomepageMediaSections({ locale = "nl" }: HomepageMediaSectionsPr
             ) : null}
           </div>
 
-          <article className="panel relative overflow-hidden rounded-[36px] bg-[var(--dark)] px-6 py-8 text-white md:px-8 md:py-10">
+          <article className="panel relative overflow-hidden rounded-[36px] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,245,239,0.95))] px-6 py-8 md:px-8 md:py-10">
             <div className="pointer-events-none absolute right-6 top-6 opacity-[0.05]">
-              <BrandLogo variant="mark-white" alt="" className="w-16 md:w-20" />
+              <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
             </div>
-            <SectionHeading
-              eyebrow={isEnglish ? "Next step" : "Volgende stap"}
-              title={
-                isEnglish
-                  ? "More visibility only matters when it leads to better conversations."
-                  : "Meer zichtbaarheid telt pas wanneer het leidt tot betere gesprekken."
-              }
-              body={
-                isEnglish
-                  ? "We review where trust is leaking, where the message is too broad and where inquiries are being lost right now."
-                  : "We kijken waar vertrouwen weglekt, waar de boodschap te breed is en waar nu aanvragen verloren gaan."
-              }
-              theme="dark"
-            />
-            <div className="mt-8 rounded-[24px] border border-white/10 bg-white/6 p-5">
-              <p className="text-sm leading-6 text-white/72">
+            <div className="max-w-xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[rgba(16,16,16,0.78)]">
+                {isEnglish ? "Next step" : "Volgende stap"}
+              </p>
+              <h3 className="mt-4 max-w-[11ch] font-[var(--font-display)] text-4xl font-semibold leading-[1.04] tracking-[-0.04em] md:text-5xl">
                 {isEnglish
-                  ? "Clear advice first. Then we decide whether a package makes sense for your situation."
-                  : "Eerst duidelijk advies. Daarna bepalen we of een pakket logisch is voor jouw situatie."}
+                  ? "Turn stronger trust into more serious inquiries."
+                  : "Zet sterker vertrouwen om in meer serieuze aanvragen."}
+              </h3>
+              <p className="mt-5 max-w-lg text-base leading-7 text-[var(--muted)] md:text-lg">
+                {isEnglish
+                  ? "We review where the message is too broad, where proof is missing and where the current site still loses serious leads."
+                  : "We kijken waar de boodschap te breed is, waar bewijs ontbreekt en waar de huidige site nog serieuze leads verliest."}
               </p>
             </div>
+
+            <div className="mt-8 grid gap-4">
+              <div className="rounded-[24px] border border-[rgba(16,16,16,0.08)] bg-white p-5">
+                <p className="text-sm font-semibold text-[var(--foreground)]">
+                  {isEnglish ? "What you get" : "Wat je krijgt"}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                  {isEnglish
+                    ? "A direct read on the biggest missed opportunities in positioning, trust and conversion."
+                    : "Een directe blik op de grootste gemiste kansen in positionering, vertrouwen en conversie."}
+                </p>
+              </div>
+              <div className="rounded-[24px] border border-[rgba(16,16,16,0.08)] bg-[rgba(18,18,18,0.03)] p-5">
+                <p className="text-sm leading-6 text-[var(--muted)]">
+                  {isEnglish
+                    ? "Clear advice first. Only then do we decide which package fits."
+                    : "Eerst duidelijk advies. Pas daarna bepalen we welk pakket logisch past."}
+                </p>
+              </div>
+            </div>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={isEnglish ? "/en/contact" : "/contact"}
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[rgba(255,255,255,0.9)]"
+                className="inline-flex items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-black"
               >
                 {isEnglish ? "Book a free analysis" : "Plan een gratis analyse"}
               </Link>
               <Link
                 href={isEnglish ? "/en/packages" : "/pakketten"}
-                className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[var(--foreground)]"
+                className="inline-flex items-center justify-center rounded-full border border-[rgba(16,16,16,0.12)] px-6 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-white"
               >
                 {isEnglish ? "View packages" : "Bekijk de pakketten"}
               </Link>
             </div>
-            <p className="mt-4 text-sm leading-6 text-white/62">
+
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
               {isEnglish
                 ? "Built for construction, prefab, window, facade and renovation companies."
                 : "Gemaakt voor bouw, prefab, kozijnen, gevel en renovatiebedrijven."}
