@@ -5,6 +5,10 @@ import type { HomepagePlacement, MediaAsset, MediaSidecar, MediaSourceGroup } fr
 let cachedAssets: MediaAsset[] | null = null;
 let cachedHomepageCollections: ReturnType<typeof buildHomepageMediaCollections> | null = null;
 
+function isSupportedPublicVideo(filename: string) {
+  return !/\.mov$/i.test(filename);
+}
+
 function sourceGroupFromPath(filePath: string): MediaSourceGroup {
   return filePath.includes("/ugc/") ? "ugc" : "visual";
 }
@@ -62,6 +66,7 @@ export function getAllMediaAssets() {
   if (!cachedAssets) {
     cachedAssets = mediaManifest
       .filter((entry) => !entry.filename.toLowerCase().includes("logo"))
+      .filter((entry) => entry.kind !== "video" || isSupportedPublicVideo(entry.filename))
       .map((entry) => createAsset(entry));
   }
 

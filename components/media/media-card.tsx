@@ -23,6 +23,20 @@ const frameClasses = {
   "clean-gallery-tile": "bg-white/92 border-[rgba(16,16,16,0.08)] p-3",
 } as const;
 
+function getVideoPlaybackSrc(src: string) {
+  if (src.startsWith("/media/")) {
+    return `https://media.githubusercontent.com/media/mahaaghas/BouwReach/main/public${src}`;
+  }
+
+  return src;
+}
+
+function getVideoMimeType(src: string) {
+  if (src.toLowerCase().endsWith(".mp4")) return "video/mp4";
+  if (src.toLowerCase().endsWith(".mov")) return "video/quicktime";
+  return "video/mp4";
+}
+
 function getContentTypeLabel(contentType: MediaContentType, locale: "nl" | "en") {
   const labels = {
     nl: {
@@ -196,6 +210,8 @@ export function MediaCard({
   const safeOverlayTitle = getSafeOverlayTitle(classification.contentType, locale);
   const cardTitle = title ?? defaultCopy.title;
   const cardBody = body ?? defaultCopy.body;
+  const videoPlaybackSrc = isVideo ? getVideoPlaybackSrc(asset.src) : undefined;
+  const videoMimeType = isVideo ? getVideoMimeType(asset.src) : undefined;
 
   return (
     <article
@@ -212,16 +228,17 @@ export function MediaCard({
         {isVideo ? (
           <video
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-            autoPlay={classification.homepagePlacement === "hero" || classification.isUgcProof}
+            autoPlay
             muted
             loop
             playsInline
             preload={priority ? "auto" : "metadata"}
             poster={asset.posterSrc}
-            aria-label={asset.alt}
-            title={asset.title}
+            aria-label={cardTitle}
+            title={cardTitle}
           >
-            <source src={asset.src} />
+            <source src={videoPlaybackSrc} type={videoMimeType} />
+            {cardTitle}
           </video>
         ) : (
           <Image
