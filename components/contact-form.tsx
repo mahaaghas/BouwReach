@@ -9,8 +9,7 @@ type ContactFormProps = {
 
 export function ContactForm({ locale = "nl" }: ContactFormProps) {
   const isEnglish = locale === "en";
-  const successPath = isEnglish ? "/thank-you" : "/bedankt";
-  const successUrl = `https://bouwreach.nl${successPath}`;
+  const successUrl = "https://bouwreach.nl/thank-you";
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,20 +23,16 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/submit-lead", {
+      const response = await fetch("https://formbold.com/s/9mgLY", {
         method: "POST",
         body: formData,
+        headers: {
+          Accept: "application/json",
+        },
       });
 
-      if (response.redirected) {
-        window.location.assign(response.url);
-        return;
-      }
-
       if (!response.ok) {
-        const result = (await response.json().catch(() => null)) as
-          | { error?: string }
-          | null;
+        const result = (await response.json().catch(() => null)) as { error?: string } | null;
 
         throw new Error(
           result?.error ??
@@ -48,7 +43,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
       }
 
       form.reset();
-      window.location.assign(successPath);
+      window.location.assign(successUrl);
     } catch (error) {
       setStatus("error");
       setErrorMessage(
@@ -80,7 +75,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
           </p>
         </div>
 
-        <form action="/submit-lead" method="POST" className="space-y-6" onSubmit={handleSubmit}>
+        <form action="https://formbold.com/s/9mgLY" method="POST" className="space-y-6" onSubmit={handleSubmit}>
           <fieldset className="space-y-5">
             <legend className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">
               {isEnglish ? "Company details" : "Bedrijfsgegevens"}
@@ -129,7 +124,6 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
 
           <input type="hidden" name="_redirect" value={successUrl} />
           <input type="hidden" name="_subject" value="New BouwReach Lead" />
-          <input type="hidden" name="locale" value={locale} />
 
           <div className="rounded-[24px] border border-[rgba(18,18,18,0.08)] bg-white/70 p-5">
             <p className="text-sm font-semibold text-[var(--foreground)]">
