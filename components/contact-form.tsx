@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 type ContactFormProps = {
   locale?: "nl" | "en";
@@ -6,6 +10,48 @@ type ContactFormProps = {
 
 export function ContactForm({ locale = "nl" }: ContactFormProps) {
   const isEnglish = locale === "en";
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("https://formbold.com/s/9mgLY", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          isEnglish
+            ? "Submission failed. Please try again."
+            : "Versturen mislukt. Probeer het opnieuw."
+        );
+      }
+
+      form.reset();
+      router.push("/thank-you");
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : isEnglish
+            ? "Submission failed. Please try again."
+            : "Versturen mislukt. Probeer het opnieuw."
+      );
+    } finally {
+      setStatus((current) => (current === "error" ? "error" : "idle"));
+    }
+  };
 
   return (
     <div className="panel rounded-[32px] p-6 md:p-8">
@@ -24,7 +70,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
           </p>
         </div>
 
-        <form action="https://formbold.com/s/9mgLY" method="POST" className="space-y-6">
+        <form action="https://formbold.com/s/9mgLY" method="POST" className="space-y-6" onSubmit={handleSubmit}>
           <fieldset className="space-y-5">
             <legend className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">
               {isEnglish ? "Company details" : "Bedrijfsgegevens"}
@@ -85,12 +131,25 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
             </p>
           </div>
 
+          {status === "error" ? (
+            <p className="rounded-[20px] border border-[rgba(168,34,34,0.18)] bg-[rgba(168,34,34,0.06)] px-4 py-3 text-sm leading-6 text-[rgb(128,34,34)]">
+              {errorMessage}
+            </p>
+          ) : null}
+
           <div className="flex flex-col gap-4">
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--dark-soft)]"
+              disabled={status === "submitting"}
+              className="inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--dark-soft)] disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {isEnglish ? "Send" : "Verstuur aanvraag"}
+              {status === "submitting"
+                ? isEnglish
+                  ? "Sending"
+                  : "Versturen"
+                : isEnglish
+                  ? "Send request"
+                  : "Verstuur aanvraag"}
             </button>
             <p className="text-sm leading-6 text-[var(--muted)]">
               {isEnglish ? (

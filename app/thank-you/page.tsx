@@ -15,8 +15,8 @@ export default function ThankYouPage() {
       <section className="panel rounded-[40px] px-6 py-12 md:px-10 md:py-16">
         <SectionHeading
           eyebrow="Thank you"
-          title="Your request has been received."
-          body="Thank you for your request. We will contact you as soon as possible to review the best next step for your situation."
+          title="Thank you, your request has been received."
+          body="We will contact you within 24 hours."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           <div className="rounded-[28px] bg-[var(--dark)] p-6 text-white">
@@ -33,7 +33,14 @@ export default function ThankYouPage() {
           </div>
         </div>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button href="/en/packages">View packages</Button>
+          <a
+            href="https://wa.me/?text=Hi%20BouwReach%2C%20my%20request%20has%20been%20received%20and%20I%20want%20to%20follow%20up."
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-w-fit items-center justify-center rounded-full border border-transparent bg-[var(--foreground)] px-6 py-3 text-sm font-semibold leading-none tracking-[0.02em] text-white no-underline whitespace-nowrap transition duration-300 shadow-[0_18px_40px_rgba(16,16,16,0.14)] hover:-translate-y-0.5 hover:bg-[var(--dark-soft)]"
+          >
+            WhatsApp contact
+          </a>
           <Button href="/en" variant="secondary">
             Back to home
           </Button>
