@@ -95,7 +95,7 @@ export function CtaInlineForm({ locale = "nl" }: CtaInlineFormProps) {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="w-full rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--foreground)] transition hover:bg-[var(--accent-strong)]"
+          className="w-full rounded-full bg-[var(--foreground)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-black"
         >
           {status === "submitting"
             ? isEnglish

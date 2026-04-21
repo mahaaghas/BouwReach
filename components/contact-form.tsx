@@ -10,6 +10,8 @@ type ContactFormProps = {
 
 export function ContactForm({ locale = "nl" }: ContactFormProps) {
   const isEnglish = locale === "en";
+  const successPath = isEnglish ? "/thank-you" : "/bedankt";
+  const successUrl = `https://bouwreach.nl${successPath}`;
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,7 +40,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
       }
 
       form.reset();
-      router.push("/thank-you");
+      router.push(successPath);
     } catch (error) {
       setStatus("error");
       setErrorMessage(
@@ -117,7 +119,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
             />
           </fieldset>
 
-          <input type="hidden" name="_redirect" value="https://bouwreach.nl/thank-you" />
+          <input type="hidden" name="_redirect" value={successUrl} />
           <input type="hidden" name="_subject" value="New BouwReach Lead" />
 
           <div className="rounded-[24px] border border-[rgba(18,18,18,0.08)] bg-white/70 p-5">

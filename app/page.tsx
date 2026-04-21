@@ -53,11 +53,9 @@ export default function Home() {
     <div className="pb-8 pt-10">
       <section className="section-shell">
         <div className="accent-grid premium-grid panel relative overflow-hidden rounded-[40px] px-6 py-12 md:px-10 md:py-16">
-          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
-            <BrandLogo variant="mark-black" alt="" className="w-28 md:w-36" />
-          </div>
-          <div className="relative grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <div>
+          <div className="relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
+            <div className="relative flex h-full flex-col justify-between pb-20 lg:min-h-[690px] lg:pr-4">
+              <div>
               <div className="mb-6 flex flex-wrap gap-3">
                 <span className="rounded-full border border-[rgba(18,18,18,0.12)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
                   BouwReach
@@ -89,8 +87,12 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+              </div>
+              <div className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 select-none opacity-[0.1] md:bottom-4">
+                <BrandLogo variant="mark-blue" alt="" className="w-16 md:w-20" />
+              </div>
             </div>
-            <div className="space-y-5">
+            <div className="flex h-full flex-col justify-between gap-5 lg:min-h-[690px]">
               <div className="rounded-[32px] bg-[var(--dark)] p-6 text-white md:p-8">
                 <p className="text-sm uppercase tracking-[0.26em] text-[var(--gold)]">Waar wij op sturen</p>
                 <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
