@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
+declare global {
+  interface Window {
+    gtag_report_conversion?: (url?: string) => boolean;
+  }
+}
+
 type ContactFormProps = {
   locale?: "nl" | "en";
 };
@@ -43,7 +49,11 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
       }
 
       form.reset();
-      window.location.assign(successUrl);
+      if (typeof window.gtag_report_conversion === "function") {
+        window.gtag_report_conversion(successUrl);
+      } else {
+        window.location.assign(successUrl);
+      }
     } catch (error) {
       setStatus("error");
       setErrorMessage(

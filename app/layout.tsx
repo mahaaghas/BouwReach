@@ -42,6 +42,26 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18110074128');
+
+            window.gtag_report_conversion = function(url) {
+              var navigated = false;
+              var callback = function () {
+                if (!navigated && typeof(url) !== 'undefined') {
+                  navigated = true;
+                  window.location = url;
+                }
+              };
+
+              gtag('event', 'conversion', {
+                'send_to': 'AW-18110074128/NzbcCMi2q6AcEJCax7tD',
+                'value': 1.0,
+                'currency': 'EUR',
+                'event_callback': callback
+              });
+
+              window.setTimeout(callback, 1200);
+              return false;
+            };
           `}
         </Script>
         <div className="relative overflow-hidden">
