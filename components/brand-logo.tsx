@@ -32,7 +32,7 @@ export function BrandLogo({ variant = "full-black", className, alt = "BouwReach"
       alt={alt}
       width={size.width}
       height={size.height}
-      unoptimized
+      quality={90}
       className={clsx("h-auto", className)}
     />
   );

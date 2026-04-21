@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { clsx } from "clsx";
 import { BrandLogo } from "@/components/brand-logo";
+import { LazyVideo } from "@/components/media/lazy-video";
 import type { MediaAsset, MediaContentType } from "@/lib/media/types";
 
 type MediaCardProps = {
@@ -226,28 +227,22 @@ export function MediaCard({
       </div>
       <div className={clsx("relative overflow-hidden rounded-[22px]", isVertical ? "aspect-[9/16]" : "aspect-[4/3] md:aspect-[16/10]")}>
         {isVideo ? (
-          <video
+          <LazyVideo
+            src={videoPlaybackSrc!}
+            mimeType={videoMimeType!}
+            posterSrc={asset.posterSrc}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload={priority ? "auto" : "metadata"}
-            poster={asset.posterSrc}
-            aria-label={cardTitle}
             title={cardTitle}
-          >
-            <source src={videoPlaybackSrc} type={videoMimeType} />
-            {cardTitle}
-          </video>
+            priority={priority}
+          />
         ) : (
           <Image
             src={asset.src}
             alt={asset.alt}
             fill
-            unoptimized
             priority={priority}
             sizes={isVertical ? "(max-width: 768px) 100vw, 33vw" : "(max-width: 768px) 100vw, 50vw"}
+            quality={72}
             className="object-cover transition duration-500 group-hover:scale-[1.02]"
           />
         )}
