@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="nl">
-      <body className="font-[var(--font-body)] text-[var(--foreground)] antialiased">
+      <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18110074128"
           strategy="beforeInteractive"
@@ -64,6 +64,8 @@ export default function RootLayout({
             };
           `}
         </Script>
+      </head>
+      <body className="font-[var(--font-body)] text-[var(--foreground)] antialiased">
         <div className="relative overflow-hidden">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(circle_at_top,rgba(17,17,17,0.11),transparent_54%)]" />
           <SiteHeader />
