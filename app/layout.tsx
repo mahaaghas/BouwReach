@@ -36,14 +36,17 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=AW-18110074128"
           strategy="beforeInteractive"
         />
-        <Script id="google-ads-gtag" strategy="beforeInteractive">
+        <Script id="google-ads-base-tag" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18110074128');
-
-            window.gtag_report_conversion = function(url) {
+          `}
+        </Script>
+        <Script id="google-ads-submit-form-event" strategy="beforeInteractive">
+          {`
+            function gtag_report_conversion(url) {
               var navigated = false;
               var callback = function () {
                 if (!navigated && typeof(url) !== 'undefined') {
@@ -51,17 +54,17 @@ export default function RootLayout({
                   window.location = url;
                 }
               };
-
               gtag('event', 'conversion', {
                 'send_to': 'AW-18110074128/NzbcCMi2q6AcEJCax7tD',
                 'value': 1.0,
                 'currency': 'EUR',
                 'event_callback': callback
               });
-
               window.setTimeout(callback, 1200);
               return false;
-            };
+            }
+
+            window.gtag_report_conversion = gtag_report_conversion;
           `}
         </Script>
       </head>
