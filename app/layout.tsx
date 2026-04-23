@@ -47,10 +47,8 @@ export default function RootLayout({
         <Script id="google-ads-submit-form-event" strategy="beforeInteractive">
           {`
             function gtag_report_conversion(url) {
-              var navigated = false;
               var callback = function () {
-                if (!navigated && typeof(url) !== 'undefined') {
-                  navigated = true;
+                if (typeof(url) != 'undefined') {
                   window.location = url;
                 }
               };
@@ -60,7 +58,6 @@ export default function RootLayout({
                 'currency': 'EUR',
                 'event_callback': callback
               });
-              window.setTimeout(callback, 1200);
               return false;
             }
 

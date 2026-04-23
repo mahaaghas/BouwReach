@@ -49,11 +49,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
       }
 
       form.reset();
-      if (typeof window.gtag_report_conversion === "function") {
-        window.gtag_report_conversion(successUrl);
-      } else {
-        window.location.assign(successUrl);
-      }
+      window.location.assign(successUrl);
     } catch (error) {
       setStatus("error");
       setErrorMessage(
@@ -155,6 +151,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
           <div className="flex flex-col gap-4">
             <button
               type="submit"
+              onClick={() => window.gtag_report_conversion?.()}
               disabled={status === "submitting"}
               className="inline-flex w-full items-center justify-center rounded-full bg-[var(--foreground)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--dark-soft)] disabled:cursor-not-allowed disabled:opacity-70"
             >
