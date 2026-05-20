@@ -65,7 +65,7 @@ export function ContactForm({ locale = "nl" }: ContactFormProps) {
   };
 
   return (
-    <div className="panel rounded-[32px] p-6 md:p-8">
+    <div id="free-analysis-form" className="panel scroll-mt-28 rounded-[32px] p-6 md:p-8">
       <div className="space-y-6">
         <div className="rounded-[24px] border border-[var(--border)] bg-[rgba(18,18,18,0.03)] p-5">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.78)]">

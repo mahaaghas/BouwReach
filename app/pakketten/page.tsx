@@ -198,7 +198,7 @@ export default function PackagesPage() {
               <div className="flex items-center justify-between gap-4">
                 <h2 className="font-[var(--font-display)] text-3xl font-semibold">{item.name}</h2>
                 {item.badge ? (
-                  <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
+                  <span className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#2F2FCC] px-3 py-1 text-center text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-white">
                     {item.badge}
                   </span>
                 ) : null}
@@ -221,7 +221,7 @@ export default function PackagesPage() {
                 {item.bestFor}
               </p>
               <div className="mt-8">
-                <Button href="/contact">Plan een gratis analyse</Button>
+                <Button href="/contact#free-analysis-form">Plan een gratis analyse</Button>
               </div>
             </article>
           ))}
@@ -232,10 +232,10 @@ export default function PackagesPage() {
         <details className="group panel overflow-hidden rounded-[36px]">
           <summary className="flex cursor-pointer list-none flex-col gap-4 px-6 py-7 md:flex-row md:items-center md:justify-between md:px-10 [&::-webkit-details-marker]:hidden">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">Pakketten vergelijken</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#2F2FCC]">Pakketten vergelijken</p>
               <h2 className="mt-3 font-[var(--font-display)] text-3xl font-semibold">Open de volledige vergelijkingstabel</h2>
             </div>
-            <span className="inline-flex w-fit rounded-full bg-[var(--dark)] px-5 py-3 text-sm font-semibold text-white transition group-open:bg-[var(--accent)]">
+            <span className="inline-flex w-fit rounded-full bg-[#2F2FCC] px-5 py-3 text-sm font-semibold text-white transition">
               Bekijk vergelijking
             </span>
           </summary>
@@ -278,7 +278,7 @@ export default function PackagesPage() {
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {addOns.map((addOn) => (
-              <div key={addOn} className="rounded-[18px] border border-[var(--border)] bg-white/70 px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
+              <div key={addOn} className="rounded-[18px] border border-[#2F2FCC] bg-white/70 px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
                 {addOn}
               </div>
             ))}
@@ -293,7 +293,7 @@ export default function PackagesPage() {
               <div className="pointer-events-none absolute right-6 top-6 opacity-60">
                 <BrandLogo variant="mark-black" alt="" className="w-4 md:w-5" />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Voor lancering</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#2F2FCC]">Voor lancering</p>
               <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold">{note.title}</h2>
               <p className="mt-4 text-base leading-7 text-[var(--muted)]">{note.body}</p>
               {note.investment ? (
@@ -318,7 +318,7 @@ export default function PackagesPage() {
             body="Dan starten we niet met een verkooppraatje. We kijken eerst naar je huidige positie, je aanvraagstroom en waar de grootste winst zit."
           />
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/contact">Plan een gratis analyse</Button>
+            <Button href="/contact#free-analysis-form">Plan een gratis analyse</Button>
           </div>
         </div>
       </section>

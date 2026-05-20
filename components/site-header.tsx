@@ -26,7 +26,7 @@ export function SiteHeader() {
         { label: "Contact", href: "/contact" },
       ];
 
-  const primaryCtaHref = isEnglish ? "/en/contact" : "/contact";
+  const primaryCtaHref = isEnglish ? "/en/contact#free-analysis-form" : "/contact#free-analysis-form";
   const primaryCtaLabel = isEnglish ? "Book a free analysis" : "Plan een gratis analyse";
   const mobileCtaLabel = isEnglish ? "Analysis" : "Analyse";
   const switchHref = isEnglish ? pathname.replace(/^\/en/, "") || "/" : `/en${pathname === "/" ? "" : pathname}`;
