@@ -14,62 +14,97 @@ export const metadata = createMetadata({
 
 const packages = [
   {
-    name: "Basic",
-    price: "€470 per month",
-    previousPrice: "Was €750",
-    label: "For companies that want to get started",
-    content: "1 video",
-    ads: "1 campaign",
-    pages: "none",
-    leadFlow: "basic optimization",
-    retargeting: "no",
-    optimisation: "light",
-    support: "standard",
+    name: "Starter Visibility",
+    label: "Professional presence",
     description:
-      "For companies that want to take the first serious step toward predictable inquiry generation.",
+      "Perfect for companies that want a professional online presence and consistent visibility.",
+    includes: [
+      "Website polish and optimization",
+      "Basic SEO optimization",
+      "Monthly SEO health check",
+      "1 SEO blog article per month",
+      "Google Business Profile optimization",
+      "1 branded social media post per week",
+      "Meta/Facebook ad management",
+      "Monthly performance report",
+      "WhatsApp and lead form optimization",
+    ],
+    bestFor: "Small contractors, window and door frame companies, and local renovation businesses.",
   },
   {
-    name: "Growth",
-    price: "€750 per month",
-    previousPrice: "Was €1,150",
-    label: "For consistent inquiries",
+    name: "Growth Package",
+    label: "Lead generation and ranking growth",
     badge: "Most chosen",
-    content: "3 videos",
-    ads: "1 to 2 campaigns",
-    pages: "1 custom landing page per month",
-    leadFlow: "optimized",
-    retargeting: "no",
-    optimisation: "monthly",
-    support: "standard",
     description:
-      "For companies that want to move from occasional inquiries to a steadier flow of serious project opportunities.",
+      "For companies ready to actively generate leads and improve Google rankings.",
+    includes: [
+      "Everything in Starter",
+      "Advanced SEO optimization",
+      "Keyword and competitor analysis",
+      "2 SEO blog articles per month",
+      "Google Ads campaign setup and optimization",
+      "Meta Ads campaign optimization",
+      "Retargeting setup",
+      "Landing page optimization",
+      "Conversion tracking setup",
+      "2 branded posts per week",
+      "Monthly strategy improvements",
+      "Lead funnel improvements",
+    ],
+    bestFor: "Companies that want more project inquiries and stronger online positioning.",
   },
   {
-    name: "Scale",
-    price: "€1,250 per month",
-    previousPrice: "Was €1,850",
-    label: "For companies that want to scale up",
-    content: "6 videos",
-    ads: "multiple campaigns",
-    pages: "3 custom landing pages per month",
-    leadFlow: "fully set up",
-    retargeting: "yes",
-    optimisation: "weekly",
-    support: "priority",
+    name: "Authority Package",
+    label: "Full marketing system",
     description:
-      "For companies that want faster growth across multiple services, regions or markets with a stronger system behind it.",
+      "A full marketing system for serious construction and prefab companies.",
+    includes: [
+      "Everything in Growth",
+      "Full website conversion optimization",
+      "Premium SEO strategy",
+      "Technical SEO improvements",
+      "4 SEO blog articles per month",
+      "Advanced Google Ads scaling and optimization",
+      "Advanced Meta campaign management",
+      "Competitor monitoring",
+      "CRM and automation integration",
+      "Lead nurturing workflows",
+      "Monthly marketing strategy session",
+      "3 posts per week",
+      "Professional content planning",
+      "Priority support",
+    ],
+    bestFor: "Companies that want aggressive growth and market authority.",
   },
 ];
 
-const comparisonRows = [
-  { key: "content", label: "Inquiry content per month" },
-  { key: "ads", label: "Advertising" },
-  { key: "pages", label: "Inquiry pages per month" },
-  { key: "leadFlow", label: "Lead flow" },
-  { key: "retargeting", label: "Retargeting" },
-  { key: "optimisation", label: "Optimization" },
-  { key: "support", label: "Support" },
-] as const;
+const setupNotes = [
+  {
+    title: "Professional Onboarding",
+    body: "To ensure optimal performance and accurate tracking, companies without existing marketing infrastructure may require an initial onboarding and setup phase.",
+    investment: "One-time setup investment: €1250",
+    includes:
+      "This may include Google Ads, Meta Business Manager, Analytics, conversion tracking, automation systems, newsletter setup, CRM connections, and campaign infrastructure.",
+  },
+  {
+    title: "Branding & Visual Identity",
+    body: "Companies without existing branding assets may require additional branding development before campaigns can launch effectively.",
+    includes:
+      "This can include logo design, visual identity, templates, website styling, and branded materials.",
+  },
+];
+
+const addOns = [
+  "Website redesign",
+  "Landing pages",
+  "Recruitment campaigns",
+  "Vehicle wrap design",
+  "Brochure design",
+  "Email marketing automation",
+  "WhatsApp automation",
+  "Google review campaigns",
+  "AI chatbot setup",
+];
 
 export default function EnglishPackagesPage() {
   return (
@@ -98,7 +133,7 @@ export default function EnglishPackagesPage() {
               key={item.name}
               className={clsx(
                 "panel relative overflow-hidden rounded-[32px] p-6 md:p-8",
-                item.name === "Growth" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
+                item.name === "Growth Package" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
               )}
             >
               <div className="pointer-events-none absolute right-6 top-6 opacity-70">
@@ -112,15 +147,23 @@ export default function EnglishPackagesPage() {
                   </span>
                 ) : null}
               </div>
-              <p className="mt-4 text-lg font-semibold">{item.price}</p>
-              <p className="mt-1 text-sm text-[var(--muted)]">{item.previousPrice}</p>
               <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.72)]">{item.label}</p>
               <p className="mt-4 text-base leading-7 text-[var(--muted)]">{item.description}</p>
-              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4 text-sm leading-6 text-[var(--foreground)]">
-                <p>Content: {item.content}</p>
-                <p>Advertising: {item.ads}</p>
-                <p>Lead flow: {item.leadFlow}</p>
+              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Includes</p>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-[var(--foreground)]">
+                  {item.includes.map((feature) => (
+                    <li key={feature} className="flex gap-2">
+                      <span className="mt-[0.65rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+              <p className="mt-6 text-sm leading-6 text-[var(--muted)]">
+                <span className="font-semibold text-[var(--foreground)]">Best for: </span>
+                {item.bestFor}
+              </p>
               <div className="mt-8">
                 <Button href="/en/contact">Book a free analysis</Button>
               </div>
@@ -130,78 +173,43 @@ export default function EnglishPackagesPage() {
       </section>
 
       <section className="pt-10">
-        <div className="overflow-hidden rounded-[36px] border border-[var(--border)] bg-white shadow-[0_28px_70px_rgba(17,17,17,0.08)]">
-          <div className="grid gap-4 border-b border-[var(--border)] bg-[rgba(18,18,18,0.03)] p-5 md:hidden">
-            {packages.map((item) => (
-              <article
-                key={`${item.name}-mobile`}
-                className={clsx(
-                  "relative overflow-hidden rounded-[26px] border border-[var(--border)] bg-white p-5",
-                  item.name === "Growth" && "border-[rgba(195,79,28,0.24)] bg-[rgba(195,79,28,0.05)]"
-                )}
-              >
-                <div className="pointer-events-none absolute right-5 top-5 opacity-70">
-                  <BrandLogo variant="mark-black" alt="" className="w-4" />
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="font-[var(--font-display)] text-2xl font-semibold">{item.name}</p>
-                    <p className="mt-2 text-base font-semibold">{item.price}</p>
-                    <p className="text-sm text-[var(--muted)]">{item.previousPrice}</p>
-                  </div>
-                  {item.badge ? (
-                    <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                      {item.badge}
-                    </span>
-                  ) : null}
-                </div>
-                <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{item.label}</p>
-                <div className="mt-5 space-y-2 text-sm leading-6 text-[var(--foreground)]">
-                  <p>Inquiry content per month: {item.content}</p>
-                  <p>Advertising: {item.ads}</p>
-                  <p>Inquiry pages per month: {item.pages}</p>
-                  <p>Lead flow: {item.leadFlow}</p>
-                  <p>Retargeting: {item.retargeting}</p>
-                  <p>Optimization: {item.optimisation}</p>
-                  <p>Support: {item.support}</p>
-                </div>
-              </article>
-            ))}
+        <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
+            <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
           </div>
-          <div className="hidden grid-cols-4 border-b border-[var(--border)] bg-[var(--dark)] text-white md:grid">
-            <div className="px-4 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-white/56 md:px-6">Comparison</div>
-            {packages.map((item) => (
-              <div key={item.name} className={clsx("px-4 py-5 md:px-6", item.name === "Growth" && "bg-white text-[var(--foreground)]")}>
-                {item.badge ? (
-                  <span className="mb-3 inline-flex rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                    {item.badge}
-                  </span>
-                ) : null}
-                <p className="font-[var(--font-display)] text-2xl font-semibold">{item.name}</p>
-                <p className="mt-3 text-lg font-semibold">{item.price}</p>
-                <p className="mt-1 text-sm opacity-70">{item.previousPrice}</p>
-                <p className="mt-4 max-w-[14rem] text-sm leading-6 opacity-80">{item.label}</p>
+          <SectionHeading
+            eyebrow="Add-ons"
+            title="Optional services when your campaign needs more"
+            body="These can be added when a company needs extra content, automation, recruitment support, or a stronger brand system around the core package."
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {addOns.map((addOn) => (
+              <div key={addOn} className="rounded-[18px] border border-[var(--border)] bg-white/70 px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
+                {addOn}
               </div>
             ))}
           </div>
-          <div className="hidden md:block">
-            {comparisonRows.map((row, index) => (
-              <div key={row.key} className={clsx("grid grid-cols-4 border-b border-[var(--border)]", index === comparisonRows.length - 1 && "border-b-0")}>
-                <div className="px-4 py-5 text-sm font-semibold text-[var(--foreground)] md:px-6">{row.label}</div>
-                {packages.map((item) => (
-                  <div
-                    key={`${item.name}-${row.key}`}
-                    className={clsx(
-                      "px-4 py-5 text-sm leading-6 text-[var(--muted)] md:px-6",
-                      item.name === "Growth" && "bg-[rgba(186,74,26,0.05)] text-[var(--foreground)]"
-                    )}
-                  >
-                    {item[row.key]}
-                  </div>
-                ))}
+        </div>
+      </section>
+
+      <section className="pt-10">
+        <div className="grid gap-6 lg:grid-cols-2">
+          {setupNotes.map((note) => (
+            <article key={note.title} className="panel relative overflow-hidden rounded-[32px] p-6 md:p-8">
+              <div className="pointer-events-none absolute right-6 top-6 opacity-60">
+                <BrandLogo variant="mark-black" alt="" className="w-4 md:w-5" />
               </div>
-            ))}
-          </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Before launch</p>
+              <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold">{note.title}</h2>
+              <p className="mt-4 text-base leading-7 text-[var(--muted)]">{note.body}</p>
+              {note.investment ? (
+                <p className="mt-5 rounded-[20px] bg-[rgba(18,18,18,0.04)] px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
+                  {note.investment}
+                </p>
+              ) : null}
+              <p className="mt-5 text-sm leading-6 text-[var(--muted)]">{note.includes}</p>
+            </article>
+          ))}
         </div>
       </section>
 

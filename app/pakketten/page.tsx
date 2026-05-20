@@ -13,62 +13,97 @@ export const metadata = createMetadata({
 
 const packages = [
   {
-    name: "Basis",
-    price: "€470 per maand",
-    previousPrice: "Van €750",
-    label: "Voor bedrijven die willen starten",
-    content: "1 video",
-    ads: "1 campagne",
-    pages: "geen",
-    leadFlow: "basis optimalisatie",
-    retargeting: "nee",
-    optimisation: "licht",
-    support: "standaard",
+    name: "Starter Visibility",
+    label: "Professionele online aanwezigheid",
     description:
-      "Voor bedrijven die hun eerste serieuze stap willen zetten richting voorspelbare aanvraaggeneratie.",
+      "Perfect voor bedrijven die een professionele online aanwezigheid en consistente zichtbaarheid willen.",
+    includes: [
+      "Website polishing & optimalisatie",
+      "Basis SEO-optimalisatie",
+      "Maandelijkse SEO health check",
+      "1 SEO blogartikel per maand",
+      "Google Business Profile optimalisatie",
+      "1 branded social media post per week",
+      "Meta/Facebook advertentiebeheer",
+      "Maandelijks prestatierapport",
+      "WhatsApp & leadformulier optimalisatie",
+    ],
+    bestFor: "Kleine aannemers, kozijnenbedrijven en lokale renovatiebedrijven.",
   },
   {
-    name: "Groei",
-    price: "€750 per maand",
-    previousPrice: "Van €1.150",
-    label: "Voor consistente aanvragen",
+    name: "Growth Package",
+    label: "Leadgeneratie en betere vindbaarheid",
     badge: "Meest gekozen",
-    content: "3 video's",
-    ads: "1 tot 2 campagnes",
-    pages: "1 custom landingspagina per maand",
-    leadFlow: "geoptimaliseerd",
-    retargeting: "nee",
-    optimisation: "maandelijks",
-    support: "standaard",
     description:
-      "Voor bedrijven die van losse aanvragen naar een consistenter ritme van serieuze projectkansen willen.",
+      "Voor bedrijven die actief leads willen genereren en hun Google-posities willen verbeteren.",
+    includes: [
+      "Alles uit Starter",
+      "Geavanceerde SEO-optimalisatie",
+      "Keyword & concurrentieanalyse",
+      "2 SEO blogartikelen per maand",
+      "Google Ads campagne setup & optimalisatie",
+      "Meta Ads campagne optimalisatie",
+      "Retargeting setup",
+      "Landingspagina optimalisatie",
+      "Conversietracking setup",
+      "2 branded posts per week",
+      "Maandelijkse strategieverbeteringen",
+      "Lead funnel verbeteringen",
+    ],
+    bestFor: "Bedrijven die meer aanvragen en een sterkere online positionering willen.",
   },
   {
-    name: "Scale",
-    price: "€1.250 per maand",
-    previousPrice: "Van €1.850",
-    label: "Voor bedrijven die willen opschalen",
-    content: "6 video's",
-    ads: "meerdere campagnes",
-    pages: "3 custom landingspagina's per maand",
-    leadFlow: "volledig ingericht",
-    retargeting: "ja",
-    optimisation: "wekelijks",
-    support: "prioriteit",
+    name: "Authority Package",
+    label: "Volledig marketingsysteem",
     description:
-      "Voor bedrijven die sneller willen groeien in meerdere diensten, regio's of markten met een steviger systeem.",
+      "Een volledig marketingsysteem voor serieuze bouw- en prefabbedrijven.",
+    includes: [
+      "Alles uit Growth",
+      "Volledige website conversie-optimalisatie",
+      "Premium SEO-strategie",
+      "Technische SEO-verbeteringen",
+      "4 SEO blogartikelen per maand",
+      "Geavanceerde Google Ads scaling",
+      "Geavanceerd Meta campagnebeheer",
+      "Concurrentiemonitoring",
+      "CRM & automation integratie",
+      "Lead nurturing workflows",
+      "Maandelijkse marketing strategiesessie",
+      "3 posts per week",
+      "Professionele content direction",
+      "Priority support",
+    ],
+    bestFor: "Bedrijven die agressieve groei en marktautoriteit willen.",
   },
 ];
 
-const comparisonRows = [
-  { key: "content", label: "Aanvraag content per maand" },
-  { key: "ads", label: "Advertenties" },
-  { key: "pages", label: "Aanvraag pagina's per maand" },
-  { key: "leadFlow", label: "Lead flow" },
-  { key: "retargeting", label: "Retargeting" },
-  { key: "optimisation", label: "Optimalisatie" },
-  { key: "support", label: "Support" },
-] as const;
+const setupNotes = [
+  {
+    title: "Professionele onboarding",
+    body: "Voor optimale prestaties en correcte tracking kunnen bedrijven zonder bestaande marketinginfrastructuur een eenmalige onboarding en setup nodig hebben.",
+    investment: "Eenmalige setup investering: €1250",
+    includes:
+      "Dit kan onder andere bestaan uit Google Ads, Meta Business Manager, Analytics, conversietracking, automatiseringen, nieuwsbrief setup, CRM-koppelingen en campagne-infrastructuur.",
+  },
+  {
+    title: "Branding & visuele identiteit",
+    body: "Bedrijven zonder bestaande branding assets kunnen aanvullende branding ontwikkeling nodig hebben voordat campagnes effectief kunnen starten.",
+    includes:
+      "Dit kan onder andere bestaan uit logo ontwerp, visuele identiteit, templates, website styling en branded materialen.",
+  },
+];
+
+const addOns = [
+  "Website redesign",
+  "Landingspagina's",
+  "Recruitment campagnes",
+  "Voertuig wrap design",
+  "Brochure design",
+  "Email marketing automation",
+  "WhatsApp automation",
+  "Google review campagnes",
+  "AI chatbot setup",
+];
 
 export default function PackagesPage() {
   return (
@@ -97,7 +132,7 @@ export default function PackagesPage() {
               key={item.name}
               className={clsx(
                 "panel relative overflow-hidden rounded-[32px] p-6 md:p-8",
-                item.name === "Groei" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
+                item.name === "Growth Package" && "border-[rgba(186,74,26,0.28)] bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(255,244,234,0.92))]"
               )}
             >
               <div className="pointer-events-none absolute right-6 top-6 opacity-70">
@@ -111,15 +146,23 @@ export default function PackagesPage() {
                   </span>
                 ) : null}
               </div>
-              <p className="mt-4 text-lg font-semibold">{item.price}</p>
-              <p className="mt-1 text-sm text-[var(--muted)]">{item.previousPrice}</p>
               <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.72)]">{item.label}</p>
               <p className="mt-4 text-base leading-7 text-[var(--muted)]">{item.description}</p>
-              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4 text-sm leading-6 text-[var(--foreground)]">
-                <p>Content: {item.content}</p>
-                <p>Advertenties: {item.ads}</p>
-                <p>Lead flow: {item.leadFlow}</p>
+              <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Inbegrepen</p>
+                <ul className="mt-4 space-y-2 text-sm leading-6 text-[var(--foreground)]">
+                  {item.includes.map((feature) => (
+                    <li key={feature} className="flex gap-2">
+                      <span className="mt-[0.65rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+              <p className="mt-6 text-sm leading-6 text-[var(--muted)]">
+                <span className="font-semibold text-[var(--foreground)]">Best voor: </span>
+                {item.bestFor}
+              </p>
               <div className="mt-8">
                 <Button href="/contact">Plan een gratis analyse</Button>
               </div>
@@ -129,78 +172,43 @@ export default function PackagesPage() {
       </section>
 
       <section className="pt-10">
-        <div className="overflow-hidden rounded-[36px] border border-[var(--border)] bg-white shadow-[0_28px_70px_rgba(17,17,17,0.08)]">
-          <div className="grid gap-4 border-b border-[var(--border)] bg-[rgba(18,18,18,0.03)] p-5 md:hidden">
-            {packages.map((item) => (
-              <article
-                key={`${item.name}-mobile`}
-                className={clsx(
-                  "relative overflow-hidden rounded-[26px] border border-[var(--border)] bg-white p-5",
-                  item.name === "Groei" && "border-[rgba(195,79,28,0.24)] bg-[rgba(195,79,28,0.05)]"
-                )}
-              >
-                <div className="pointer-events-none absolute right-5 top-5 opacity-70">
-                  <BrandLogo variant="mark-black" alt="" className="w-4" />
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="font-[var(--font-display)] text-2xl font-semibold">{item.name}</p>
-                    <p className="mt-2 text-base font-semibold">{item.price}</p>
-                    <p className="text-sm text-[var(--muted)]">{item.previousPrice}</p>
-                  </div>
-                  {item.badge ? (
-                    <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                      {item.badge}
-                    </span>
-                  ) : null}
-                </div>
-                <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{item.label}</p>
-                <div className="mt-5 space-y-2 text-sm leading-6 text-[var(--foreground)]">
-                  <p>Aanvraag content per maand: {item.content}</p>
-                  <p>Advertenties: {item.ads}</p>
-                  <p>Aanvraag pagina&apos;s per maand: {item.pages}</p>
-                  <p>Lead flow: {item.leadFlow}</p>
-                  <p>Retargeting: {item.retargeting}</p>
-                  <p>Optimalisatie: {item.optimisation}</p>
-                  <p>Support: {item.support}</p>
-                </div>
-              </article>
-            ))}
+        <div className="panel relative overflow-hidden rounded-[36px] px-6 py-10 md:px-10 md:py-12">
+          <div className="pointer-events-none absolute right-5 top-5 select-none opacity-[0.06] md:right-10 md:top-10">
+            <BrandLogo variant="mark-black" alt="" className="w-16 md:w-20" />
           </div>
-          <div className="hidden grid-cols-4 border-b border-[var(--border)] bg-[var(--dark)] text-white md:grid">
-            <div className="px-4 py-5 text-sm font-semibold uppercase tracking-[0.2em] text-white/56 md:px-6">Vergelijking</div>
-            {packages.map((item) => (
-              <div key={item.name} className={clsx("px-4 py-5 md:px-6", item.name === "Groei" && "bg-white text-[var(--foreground)]")}>
-                {item.badge ? (
-                  <span className="mb-3 inline-flex rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white">
-                    {item.badge}
-                  </span>
-                ) : null}
-                <p className="font-[var(--font-display)] text-2xl font-semibold">{item.name}</p>
-                <p className="mt-3 text-lg font-semibold">{item.price}</p>
-                <p className="mt-1 text-sm opacity-70">{item.previousPrice}</p>
-                <p className="mt-4 max-w-[14rem] text-sm leading-6 opacity-80">{item.label}</p>
+          <SectionHeading
+            eyebrow="Add-ons"
+            title="Optionele diensten wanneer je campagne meer nodig heeft"
+            body="Deze kunnen worden toegevoegd wanneer een bedrijf extra content, automatisering, recruitment support of een sterker merksysteem rond het pakket nodig heeft."
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {addOns.map((addOn) => (
+              <div key={addOn} className="rounded-[18px] border border-[var(--border)] bg-white/70 px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
+                {addOn}
               </div>
             ))}
           </div>
-          <div className="hidden md:block">
-            {comparisonRows.map((row, index) => (
-              <div key={row.key} className={clsx("grid grid-cols-4 border-b border-[var(--border)]", index === comparisonRows.length - 1 && "border-b-0")}>
-                <div className="px-4 py-5 text-sm font-semibold text-[var(--foreground)] md:px-6">{row.label}</div>
-                {packages.map((item) => (
-                  <div
-                    key={`${item.name}-${row.key}`}
-                    className={clsx(
-                      "px-4 py-5 text-sm leading-6 text-[var(--muted)] md:px-6",
-                      item.name === "Groei" && "bg-[rgba(186,74,26,0.05)] text-[var(--foreground)]"
-                    )}
-                  >
-                    {item[row.key]}
-                  </div>
-                ))}
+        </div>
+      </section>
+
+      <section className="pt-10">
+        <div className="grid gap-6 lg:grid-cols-2">
+          {setupNotes.map((note) => (
+            <article key={note.title} className="panel relative overflow-hidden rounded-[32px] p-6 md:p-8">
+              <div className="pointer-events-none absolute right-6 top-6 opacity-60">
+                <BrandLogo variant="mark-black" alt="" className="w-4 md:w-5" />
               </div>
-            ))}
-          </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">Voor lancering</p>
+              <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold">{note.title}</h2>
+              <p className="mt-4 text-base leading-7 text-[var(--muted)]">{note.body}</p>
+              {note.investment ? (
+                <p className="mt-5 rounded-[20px] bg-[rgba(18,18,18,0.04)] px-4 py-3 text-sm font-semibold text-[var(--foreground)]">
+                  {note.investment}
+                </p>
+              ) : null}
+              <p className="mt-5 text-sm leading-6 text-[var(--muted)]">{note.includes}</p>
+            </article>
+          ))}
         </div>
       </section>
 
