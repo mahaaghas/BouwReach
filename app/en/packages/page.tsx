@@ -106,6 +106,63 @@ const addOns = [
   "AI chatbot setup",
 ];
 
+const comparisonRows = [
+  {
+    feature: "SEO articles",
+    starter: "1 per month",
+    growth: "2 per month",
+    authority: "4 per month",
+  },
+  {
+    feature: "Social media posts",
+    starter: "1 branded post per week",
+    growth: "2 branded posts per week",
+    authority: "3 posts per week",
+  },
+  {
+    feature: "SEO level",
+    starter: "Basic SEO and monthly health check",
+    growth: "Advanced SEO with keyword and competitor analysis",
+    authority: "Premium SEO strategy and technical improvements",
+  },
+  {
+    feature: "Paid ads",
+    starter: "Meta/Facebook ad management",
+    growth: "Google Ads setup plus Meta Ads optimization",
+    authority: "Advanced Google Ads scaling and Meta campaign management",
+  },
+  {
+    feature: "Retargeting",
+    starter: "Not included",
+    growth: "Included",
+    authority: "Included and optimized",
+  },
+  {
+    feature: "Landing pages",
+    starter: "Website polish and lead form optimization",
+    growth: "Landing page optimization",
+    authority: "Full website conversion optimization",
+  },
+  {
+    feature: "Tracking and reporting",
+    starter: "Monthly performance report",
+    growth: "Conversion tracking setup",
+    authority: "Competitor monitoring and deeper performance direction",
+  },
+  {
+    feature: "Automation and CRM",
+    starter: "WhatsApp and lead form optimization",
+    growth: "Lead funnel improvements",
+    authority: "CRM integration and lead nurturing workflows",
+  },
+  {
+    feature: "Strategy and support",
+    starter: "Monthly SEO health check",
+    growth: "Monthly strategy improvements",
+    authority: "Monthly strategy session and priority support",
+  },
+];
+
 export default function EnglishPackagesPage() {
   return (
     <div className="section-shell pb-8 pt-10">
@@ -170,6 +227,44 @@ export default function EnglishPackagesPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="pt-10">
+        <details className="group panel overflow-hidden rounded-[36px]">
+          <summary className="flex cursor-pointer list-none flex-col gap-4 px-6 py-7 md:flex-row md:items-center md:justify-between md:px-10 [&::-webkit-details-marker]:hidden">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">Compare packages</p>
+              <h2 className="mt-3 font-[var(--font-display)] text-3xl font-semibold">Open the full comparison table</h2>
+            </div>
+            <span className="inline-flex w-fit rounded-full bg-[var(--dark)] px-5 py-3 text-sm font-semibold text-white transition group-open:bg-[var(--accent)]">
+              View comparison
+            </span>
+          </summary>
+          <div className="border-t border-[var(--border)] px-4 pb-6 md:px-6 md:pb-8">
+            <div className="overflow-x-auto rounded-[28px] border border-[var(--border)] bg-white">
+              <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                <thead className="bg-[var(--dark)] text-white">
+                  <tr>
+                    <th className="px-5 py-4 font-semibold">Feature</th>
+                    <th className="px-5 py-4 font-semibold">Starter Visibility</th>
+                    <th className="bg-white px-5 py-4 font-semibold text-[var(--foreground)]">Growth Package</th>
+                    <th className="px-5 py-4 font-semibold">Authority Package</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row, index) => (
+                    <tr key={row.feature} className={clsx("border-b border-[var(--border)]", index === comparisonRows.length - 1 && "border-b-0")}>
+                      <th className="px-5 py-4 align-top font-semibold text-[var(--foreground)]">{row.feature}</th>
+                      <td className="px-5 py-4 align-top leading-6 text-[var(--muted)]">{row.starter}</td>
+                      <td className="bg-[rgba(186,74,26,0.05)] px-5 py-4 align-top leading-6 text-[var(--foreground)]">{row.growth}</td>
+                      <td className="px-5 py-4 align-top leading-6 text-[var(--muted)]">{row.authority}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
       </section>
 
       <section className="pt-10">
