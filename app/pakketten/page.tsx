@@ -14,6 +14,7 @@ export const metadata = createMetadata({
 const packages = [
   {
     name: "Starter Visibility",
+    price: "€470 per maand",
     label: "Professionele online aanwezigheid",
     description:
       "Perfect voor bedrijven die een professionele online aanwezigheid en consistente zichtbaarheid willen.",
@@ -32,6 +33,7 @@ const packages = [
   },
   {
     name: "Growth Package",
+    price: "€750 per maand",
     label: "Leadgeneratie en betere vindbaarheid",
     badge: "Meest gekozen",
     description:
@@ -54,6 +56,7 @@ const packages = [
   },
   {
     name: "Authority Package",
+    price: "€1.250 per maand",
     label: "Volledig marketingsysteem",
     description:
       "Een volledig marketingsysteem voor serieuze bouw- en prefabbedrijven.",
@@ -203,6 +206,7 @@ export default function PackagesPage() {
                   </span>
                 ) : null}
               </div>
+              <p className="mt-4 text-lg font-semibold">{item.price}</p>
               <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[rgba(16,16,16,0.72)]">{item.label}</p>
               <p className="mt-4 text-base leading-7 text-[var(--muted)]">{item.description}</p>
               <div className="mt-6 rounded-[24px] bg-[rgba(18,18,18,0.04)] p-4">
